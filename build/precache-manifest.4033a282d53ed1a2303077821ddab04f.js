@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ac89830390ce9ca389758d59259536c8",
+    "revision": "965e22acf99f1d8947896a3ffaca110a",
     "url": "/index.html"
   },
   {
-    "revision": "0439c1bb2938e8a2f10b",
+    "revision": "b7e26fef6813f933035c",
     "url": "/static/css/main.8a8db68b.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/js/2.e709df71.chunk.js"
   },
   {
-    "revision": "0439c1bb2938e8a2f10b",
-    "url": "/static/js/main.90ceec48.chunk.js"
+    "revision": "b7e26fef6813f933035c",
+    "url": "/static/js/main.1650d473.chunk.js"
   },
   {
     "revision": "56256c405bfa76082cb3",
@@ -28,8 +28,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/Cement_Truck.7aaa4c69.png"
   },
   {
-    "revision": "7136ff5a0318d191ccdf9e02965c328c",
-    "url": "/static/media/Chiller_Trucks.7136ff5a.png"
+    "revision": "905a15d2810bbc3258b77a99dd11140d",
+    "url": "/static/media/Chiller_Trucks.905a15d2.png"
   },
   {
     "revision": "350387f5ee9e1569dc00c4952fca7cc8",
@@ -40,8 +40,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/Flat_bed_Trailer.577ee4aa.png"
   },
   {
-    "revision": "0c279c74329b60d2f9b4d20375197e14",
-    "url": "/static/media/Livestock_Trucks.0c279c74.png"
+    "revision": "75aff6bd696d7d6ae73bc5de14ab1843",
+    "url": "/static/media/Livestock_Trucks.75aff6bd.png"
   },
   {
     "revision": "3fa2954c189a0f3c85032e90824c8717",
@@ -60,12 +60,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/Tow_Truck.e9486d0a.png"
   },
   {
-    "revision": "63803d1efe57ce16bdec2579a9c8a0d7",
-    "url": "/static/media/boat_haulage.63803d1e.png"
+    "revision": "a716675b76be91ff6927ca5f7b29b658",
+    "url": "/static/media/boat_haulage.a716675b.png"
   },
   {
-    "revision": "3f832b6e5721eed869d4ac435e2dd9c3",
-    "url": "/static/media/box_truck.3f832b6e.png"
+    "revision": "ed8eced32a716b446e624c9f88d708ff",
+    "url": "/static/media/box_truck.ed8eced3.png"
   },
   {
     "revision": "6565588c8d5b3c6b2867d1d9037e4f21",
@@ -76,8 +76,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/cover_image_1.76baf406.png"
   },
   {
-    "revision": "9539f90d3389deb85c691ca1719f312a",
-    "url": "/static/media/crane truck2.9539f90d.png"
+    "revision": "e4c42df3e78e0bc7a7d51482df4a066a",
+    "url": "/static/media/crane truck2.e4c42df3.png"
   },
   {
     "revision": "e22079d988bd34dee9239a6288b42e7d",
