@@ -69,7 +69,7 @@ function ContactUsForm(props) {
           style={{ color: "blue", fontSize: "1.5em" }}
           component="legend"
         >
-          Contact Us
+          <Typography variant="h4">Contact Us</Typography>
         </FormLabel>
       </Grid>
       <Box
@@ -78,7 +78,7 @@ function ContactUsForm(props) {
         // // onSubmit={onSubmit}
         sx={{
           width: 400,
-          height: 420,
+          height: 340,
         }}
         noValidate
         autoComplete="off"
@@ -87,13 +87,11 @@ function ContactUsForm(props) {
           <Typography variant="h5" style={{ marginTop: 50 }}>
             <span style={{ color: "orange" }}>Address:</span>{" "}
             <span style={{ marginLeft: 10 }}>
-              Plot 8, Block C, Apapa Oshodi{" "}
-              <span style={{ marginLeft: 100 }}>
-                Expressway, Ilasamaja Industrial{" "}
-              </span>{" "}
-              <span style={{ marginLeft: 100 }}>
+              12 Wharf Road, off Itapeju street{" "}
+              <span style={{ marginLeft: 100 }}>Apapa, Lagos </span>{" "}
+              {/* <span style={{ marginLeft: 100 }}>
                 Estate, Ilasa, Lagos, Nigeria
-              </span>
+              </span> */}
             </span>
             <br /> <br />
           </Typography>
@@ -103,7 +101,9 @@ function ContactUsForm(props) {
               marketplace@brightwayafrica.com{" "}
             </span>
             <br /> <br /> <span style={{ color: "orange" }}>Tel:</span>{" "}
-            <span style={{ marginLeft: 50 }}>081 7943 5368</span>
+            <span style={{ marginLeft: 50 }}>+234 809 429 8412</span>
+            <br /> <br />
+            <span style={{ marginLeft: 100 }}>+234 809 835 4000</span>
           </Typography>
         </Grid>
       </Box>
