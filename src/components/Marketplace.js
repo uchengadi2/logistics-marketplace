@@ -362,7 +362,7 @@ const Marketplace = (props) => {
                     onClick={(event) => {
                       event.preventDefault();
                       //  history.push(`/orders/completed`);
-                      window.open("http://localhost:3009/");
+                      window.open("https://partners.brightwayafrica.com/");
                     }}
                   >
                     <span style={{ marginRight: 10 }}>Visit Partner Site </span>
