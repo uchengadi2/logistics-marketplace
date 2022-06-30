@@ -121,8 +121,8 @@ export default function ProductCard(props) {
           className={classes.media}
           component="img"
           alt={props.alt}
-          image={require(`${imageUrl}/${props.image}`)}
-          //image={<img src={`${imageUrl}/${props.image}`} alt=" " />}
+          // image={require(`${imageUrl}/${props.image}`)}
+          image={<img src={`${imageUrl}/${props.image}`} alt=" " />}
           //image={`${imageUrl}/${props.image}`}
           title={props.title}
         />
