@@ -98,6 +98,7 @@ export default function ProductCard(props) {
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
 
+  //const imageUrl = `${baseURL}/images/categories/${props.image}`;
   const imageUrl = `${baseURL}/images/categories/${props.image}`;
 
   console.log("the image is:", imageUrl);
@@ -112,12 +113,11 @@ export default function ProductCard(props) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          component="img"
-          alt={props.alt}
+          //component="img"
+          //alt={props.alt}
           // image={require(`${imageUrl}/${props.image}`)}
           //image={<img src={imageUrl} alt=" " />}
           image={require(imageUrl)} // require image
-          //image={imageUrl}
           title={props.title}
         />
         <CardContent>
