@@ -115,8 +115,9 @@ export default function ProductCard(props) {
           component="img"
           alt={props.alt}
           // image={require(`${imageUrl}/${props.image}`)}
-          image={<img src={imageUrl} alt=" " />}
-          //image={`${imageUrl}/${props.image}`}
+          //image={<img src={imageUrl} alt=" " />}
+          image={require(imageUrl)} // require image
+          //image={imageUrl}
           title={props.title}
         />
         <CardContent>
