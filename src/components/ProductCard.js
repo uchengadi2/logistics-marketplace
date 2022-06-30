@@ -32,6 +32,7 @@ import towtruck from "./../logistic_assets/Tow_Truck.png";
 import cranetruck from "./../logistic_assets/crane truck2.png";
 import ButtonArrow from "./ui/ButtonArrow";
 import Bookings from "./Bookings";
+import { baseURL } from "./../apis/util";
 
 import theme from "./ui/Theme";
 
@@ -97,6 +98,14 @@ export default function ProductCard(props) {
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
 
+  //const imageUrl = `${baseURL}/images/categories`;
+
+  console.log("the window url", window.location.host);
+
+  const imageUrl = `${window.location.host}/images/categories`;
+
+  console.log("the image url", imageUrl);
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -110,7 +119,9 @@ export default function ProductCard(props) {
           className={classes.media}
           component="img"
           alt={props.alt}
-          image={props.image}
+          // image={require(`${imageUrl}/${props.image}`)}
+          //image={<img src={`${imageUrl}/${props.image}`} alt=" " />}
+          image={`${imageUrl}/${props.image}`}
           title={props.title}
         />
         <CardContent>

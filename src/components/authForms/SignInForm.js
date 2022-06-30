@@ -71,9 +71,13 @@ const SignInForm = (props) => {
     props.handleMakeOpenSignUpDialogStatus();
   };
 
-  const handleMakeCloseSignUpDialogStatus = ()=>{
+  const handleMakeCloseSignUpDialogStatus = () => {
     props.handleMakeCloseSignUpDialogStatus();
-  }
+  };
+
+  const handleLoginDialogOpenStatus = () => {
+    props.handleLoginDialogOpenStatus();
+  };
 
   const renderSignUpForm = () => {
     return (
@@ -92,14 +96,14 @@ const SignInForm = (props) => {
             token={props.token}
             handleLoginDialogOpenStatus={handleLoginDialogOpenStatus}
             handleMakeOpenSignUpDialogStatus={handleMakeOpenSignUpDialogStatus}
-            handleMakeCloseSignUpDialogStatus={handleMakeCloseSignUpDialogStatus}
+            handleMakeCloseSignUpDialogStatus={
+              handleMakeCloseSignUpDialogStatus
+            }
           />
         </DialogContent>
       </Dialog>
     );
   };
-
-  
 
   // const handleFormChange = (event) => {
   //   let loginParamsNew = { ...loginParams };

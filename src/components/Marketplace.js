@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Lottie from "react-lottie";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -12,6 +12,8 @@ import { Link } from "react-router-dom";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import Snackbar from "@material-ui/core/Snackbar";
+
+import data from "./../apis/local";
 import CallToAction from "./ui/CallToAction";
 import animationData from "./../animations/landinganimation/data";
 import customSoftwareicon from "./../assets/Custom Software Icon.svg";
@@ -41,6 +43,8 @@ import AboutUsFormContainer from "./aboutus/AboutUsFormContainer";
 import ContactUsContainerForm from "./contactus/ContactUsContainerForm";
 import BecomePartnerFormContainer from "./partner/BecomePartnerFormContainer";
 //import mobileBackground from "./../../assets/mobileBackground.jpg";
+
+import { baseURL } from "./../apis/util";
 
 const useStyles = makeStyles((theme) => ({
   animation: {
@@ -183,6 +187,8 @@ const Marketplace = (props) => {
   const [aboutUsOpen, setAboutUsOpen] = useState(false);
   const [contactUsOpen, setContactUsOpen] = useState(false);
   const [becomePartnerOpen, setBecomePartnerOpen] = useState(false);
+  const [categoryList, setCategoryList] = useState([]);
+
   const [alert, setAlert] = useState({
     open: false,
     message: "",
@@ -218,6 +224,32 @@ const Marketplace = (props) => {
     });
     setBecomePartnerOpen(true);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let allData = [];
+      //data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      const response = await data.get("/categories");
+      const workingData = response.data.data.data;
+      workingData.map((category) => {
+        allData.push({
+          id: category._id,
+          name: category.name,
+          image: category.image || " ",
+          description: category.description || " ",
+        });
+      });
+      setCategoryList(allData);
+    };
+
+    //call the function
+
+    fetchData().catch(console.error);
+  }, []);
+
+  //const imageUrl = `${baseURL}/images/categories/${image}`;
+
+  
 
   const categories = [
     {
@@ -294,13 +326,15 @@ const Marketplace = (props) => {
     },
   ];
 
+  console.log("thsi is the categories list:", categoryList);
+
   const categoriesList = (
     <React.Fragment>
       <Grid container direction="row">
-        {categories.map((category, index) => (
+        {categoryList.map((category, index) => (
           <ProductCard
-            title={category.title}
-            key={`${category.title}${index}`}
+            title={category.name}
+            key={`${category.id}${index}`}
             description={category.description}
             image={category.image}
             token={props.token}
