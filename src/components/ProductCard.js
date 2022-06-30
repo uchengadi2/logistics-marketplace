@@ -98,11 +98,11 @@ export default function ProductCard(props) {
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
 
-  //const imageUrl = `${baseURL}/images/categories`;
+  const imageUrl = `${baseURL}/images/categories`;
 
   console.log("the window url", window.location.host);
 
-  const imageUrl = `${window.location.host}/images/categories`;
+  //const imageUrl = `${window.location.host}/images/categories`;
 
   console.log("the image url", imageUrl);
 
