@@ -113,11 +113,12 @@ export default function ProductCard(props) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          //component="img"
-          //alt={props.alt}
+          component="img"
+          alt={props.title}
           // image={require(`${imageUrl}/${props.image}`)}
           //image={<img src={imageUrl} alt=" " />}
-          image={require(imageUrl)} // require image
+          //image={require(imageUrl)} // require image
+          src={imageUrl}
           title={props.title}
         />
         <CardContent>
