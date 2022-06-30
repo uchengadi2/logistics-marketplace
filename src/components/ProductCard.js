@@ -116,10 +116,11 @@ export default function ProductCard(props) {
           component="img"
           alt={props.title}
           // image={require(`${imageUrl}/${props.image}`)}
-          image={<img crossorigin="anonymous" src={imageUrl} alt=" " />}
+          //image={<img crossorigin="anonymous" src={imageUrl} alt=" " />}
           //image={require(imageUrl)} // require image
-          //src={imageUrl}
+          image={imageUrl}
           title={props.title}
+          crossOrigin="anonymous"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
