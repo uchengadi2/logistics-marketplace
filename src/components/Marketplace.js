@@ -249,8 +249,6 @@ const Marketplace = (props) => {
 
   //const imageUrl = `${baseURL}/images/categories/${image}`;
 
-  
-
   const categories = [
     {
       title: "Flat-bed Trailer",
@@ -327,6 +325,7 @@ const Marketplace = (props) => {
   ];
 
   console.log("thsi is the categories list:", categoryList);
+  const Str = require("@supercharge/strings");
 
   const categoriesList = (
     <React.Fragment>
@@ -335,7 +334,8 @@ const Marketplace = (props) => {
           <ProductCard
             title={category.name}
             key={`${category.id}${index}`}
-            description={category.description}
+            description={Str(category.description).limit(500, "...").get()}
+            //description={category.description}
             image={category.image}
             token={props.token}
             userId={props.userId}

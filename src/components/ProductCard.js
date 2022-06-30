@@ -39,7 +39,8 @@ import theme from "./ui/Theme";
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 325,
-    height: 440,
+    //height: 440,
+    height: 650,
 
     marginLeft: "10px",
     borderRadius: 30,
@@ -101,7 +102,13 @@ export default function ProductCard(props) {
   //const imageUrl = `${baseURL}/images/categories/${props.image}`;
   const imageUrl = `${baseURL}/images/categories/${props.image}`;
 
-  console.log("the image is:", imageUrl);
+  const Str = require("@supercharge/strings");
+
+  console.log(
+    "this is description trim:",
+    Str(props.description).limit(100, "...").get()
+  );
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -115,9 +122,6 @@ export default function ProductCard(props) {
           className={classes.media}
           component="img"
           alt={props.title}
-          // image={require(`${imageUrl}/${props.image}`)}
-          //image={<img crossorigin="anonymous" src={imageUrl} alt=" " />}
-          //image={require(imageUrl)} // require image
           image={imageUrl}
           title={props.title}
           crossOrigin="anonymous"
@@ -186,7 +190,8 @@ export default function ProductCard(props) {
                 className={classes.media}
                 component="img"
                 alt={props.alt}
-                image={props.image}
+                image={imageUrl}
+                crossOrigin="anonymous"
               />
             </CardActionArea>
           </Card>
