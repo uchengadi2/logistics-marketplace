@@ -98,16 +98,9 @@ export default function ProductCard(props) {
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
 
-  const imageUrl = `${baseURL}/images/categories`;
+  const imageUrl = `${baseURL}/images/categories/${props.image}`;
 
-  console.log("the window url", window.location.host);
-
-  //const imageUrl = `${window.location.host}/images/categories`;
-
-  console.log("the image url", imageUrl);
-
-  console.log("origin is:", window.location.origin);
-
+  console.log("the image is:", imageUrl);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -122,7 +115,7 @@ export default function ProductCard(props) {
           component="img"
           alt={props.alt}
           // image={require(`${imageUrl}/${props.image}`)}
-          image={<img src={`${imageUrl}/${props.image}`} alt=" " />}
+          image={<img src={imageUrl} alt=" " />}
           //image={`${imageUrl}/${props.image}`}
           title={props.title}
         />
