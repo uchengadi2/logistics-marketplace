@@ -113,7 +113,7 @@ export default function ProductCard(props) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          //component="img"
+          component="img"
           alt={props.title}
           // image={require(`${imageUrl}/${props.image}`)}
           image={<img crossorigin="anonymous" src={imageUrl} alt=" " />}
