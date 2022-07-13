@@ -171,12 +171,10 @@ function BookingForm(props) {
     const fetchData = async () => {
       let allData = [];
       data.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-      const response = await data.get("/states", {
-        params: { country: sourceCountry },
-      });
+      const response = await data.get("/states");
       const workingData = response.data.data.data;
-      workingData.map((country) => {
-        allData.push({ id: country._id, name: country.name });
+      workingData.map((state) => {
+        allData.push({ id: state._id, name: state.name });
       });
       setSourceStateList(allData);
     };
@@ -184,18 +182,17 @@ function BookingForm(props) {
     //call the function
 
     fetchData().catch(console.error);
-  }, [sourceCountry]);
+    // }, [sourceCountry]);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       let allData = [];
       data.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-      const response = await data.get("/states", {
-        params: { country: destinationCountry },
-      });
+      const response = await data.get("/states");
       const workingData = response.data.data.data;
-      workingData.map((country) => {
-        allData.push({ id: country._id, name: country.name });
+      workingData.map((state) => {
+        allData.push({ id: state._id, name: state.name });
       });
       setDestinationStateList(allData);
     };
@@ -203,18 +200,17 @@ function BookingForm(props) {
     //call the function
 
     fetchData().catch(console.error);
-  }, [destinationCountry]);
+    //}, [destinationCountry]);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       let allData = [];
       data.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-      const response = await data.get("/cities", {
-        params: { state: sourceState },
-      });
+      const response = await data.get("/cities");
       const workingData = response.data.data.data;
-      workingData.map((state) => {
-        allData.push({ id: state._id, name: state.name });
+      workingData.map((city) => {
+        allData.push({ id: city._id, name: city.name });
       });
       setSourceCityList(allData);
     };
@@ -222,18 +218,17 @@ function BookingForm(props) {
     //call the function
 
     fetchData().catch(console.error);
-  }, [sourceState]);
+    //}, [sourceState]);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
       let allData = [];
       data.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-      const response = await data.get("/cities", {
-        params: { state: destinationState },
-      });
+      const response = await data.get("/cities");
       const workingData = response.data.data.data;
-      workingData.map((state) => {
-        allData.push({ id: state._id, name: state.name });
+      workingData.map((city) => {
+        allData.push({ id: city._id, name: city.name });
       });
       setDestinationCityList(allData);
     };
@@ -241,7 +236,8 @@ function BookingForm(props) {
     //call the function
 
     fetchData().catch(console.error);
-  }, [destinationState]);
+    //}, [destinationState]);
+  }, []);
 
   const handleSourcePlaceTypeChange = (event) => {
     setSourcePlaceType(event.target.value);
