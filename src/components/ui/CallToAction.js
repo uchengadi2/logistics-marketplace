@@ -73,8 +73,7 @@ export default function CallToAction(props) {
   const [becomePartnerOpen, setBecomePartnerOpen] = useState(false);
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
-
-  console.log("this is the props at CallToAction component", props);
+  const matchesMD = useMediaQuery(theme.breakpoints.up("md"));
 
   const handleSuccessfulBecomeAPartnerOpenDialogBoxWithSnackbar = () => {
     props.handleSuccessfulBecomeAPartnerOpenDialogBoxWithSnackbar();
@@ -101,52 +100,78 @@ export default function CallToAction(props) {
       >
         <Grid container direction="column">
           <Grid item>
-            <Typography variant="h2">
-              Simple Logistics Marketplace <br /> Revolutionary Results
-            </Typography>
-            <Typography variant="subtitle2" style={{ fontSize: "1.5rem" }}>
-              Take advantage of the 21st century
-            </Typography>
-            <Grid
-              container
-              justifyContent={matchesSM ? "center" : undefined}
-              item
-            >
-              <Button
-                // component={Link}
-                // to="/revolution"
-                variant="outlined"
-                className={classes.visitPartnerButtonsite}
-                onClick={(event) => {
-                  event.preventDefault();
-                  //  history.push(`/orders/completed`);
-                  //window.open("http://localhost:3009/");
-                  window.open("https://partners.brightwayafrica.com/");
-                }}
+            {matchesMD ? (
+              <Typography variant="h2">
+                Simple Logistics Marketplace <br /> Revolutionary Results
+              </Typography>
+            ) : (
+              <Typography variant="h2" style={{ fontSize: "1.5rem" }}>
+                Simple Logistics Marketplace <br /> Revolutionary Results
+              </Typography>
+            )}
+            {matchesMD ? (
+              <Typography variant="subtitle2" style={{ fontSize: "1.5rem" }}>
+                Take advantage of the 21st century
+              </Typography>
+            ) : (
+              <Typography
+                variant="subtitle2"
+                style={{ fontSize: "1rem", marginTop: 20, marginBottom: 20 }}
               >
-                <span style={{ marginRight: 10 }}>Visit Partner Site</span>
-                <ButtonArrow
-                  height={10}
-                  width={10}
-                  fill={theme.palette.common.orange}
-                />
-              </Button>
-            </Grid>
+                Take advantage of the 21st century
+              </Typography>
+            )}
+
+            {matchesMD ? (
+              <Grid
+                container
+                justifyContent={matchesSM ? "center" : undefined}
+                item
+              >
+                <Button
+                  // component={Link}
+                  // to="/revolution"
+                  variant="outlined"
+                  className={classes.visitPartnerButtonsite}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    //  history.push(`/orders/completed`);
+                    //window.open("http://localhost:3009/");
+                    window.open("https://partners.brightwayafrica.com/");
+                  }}
+                >
+                  <span style={{ marginRight: 10 }}>Visit Partner Site</span>
+                  <ButtonArrow
+                    height={10}
+                    width={10}
+                    fill={theme.palette.common.orange}
+                  />
+                </Button>
+              </Grid>
+            ) : (
+              <></>
+            )}
           </Grid>
         </Grid>
       </Grid>
-      <Grid item>
-        <Button
-          // component={Link}
-          // to="/estimate"
-          variant="contained"
-          className={classes.estimateButton}
-          // onClick={() => props.setValue(5)}
-          onClick={() => [setBecomePartnerOpen(true), history.push("/")]}
-        >
-          Become a Partner
-        </Button>
-      </Grid>
+
+      {matchesMD ? (
+        <Grid item>
+          <Button
+            // component={Link}
+            // to="/estimate"
+            variant="contained"
+            className={classes.estimateButton}
+            // onClick={() => props.setValue(5)}
+            onClick={() => [setBecomePartnerOpen(true), history.push("/")]}
+          >
+            Become a Partner
+          </Button>
+        </Grid>
+      ) : (
+        <></>
+      )}
+
       <Dialog
         //style={{ zIndex: 1302 }}
         fullScreen={matchesXS}

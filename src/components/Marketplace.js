@@ -82,8 +82,15 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "0.9rem",
     height: 45,
     width: 200,
+    [theme.breakpoints.down("sm")]: {
+      width: 100,
+    },
     "&:hover": {
       backgroundColor: theme.palette.common.white,
+    },
+
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "2em",
     },
   },
   learnButton: {
@@ -102,8 +109,11 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       marginTop: "3em",
     },
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("sm")]: {
       marginTop: "2em",
+    },
+    [theme.breakpoints.down("xs")]: {
+      marginTop: "1em",
     },
   },
   heroTextContainer: {
@@ -184,6 +194,7 @@ const Marketplace = (props) => {
   const theme = useTheme();
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
+  const matchesMD = useMediaQuery(theme.breakpoints.up("md"));
   const [aboutUsOpen, setAboutUsOpen] = useState(false);
   const [contactUsOpen, setContactUsOpen] = useState(false);
   const [becomePartnerOpen, setBecomePartnerOpen] = useState(false);
@@ -327,21 +338,46 @@ const Marketplace = (props) => {
   console.log("thsi is the categories list:", categoryList);
   const Str = require("@supercharge/strings");
 
-  const categoriesList = (
+  const categoriesList = matchesMD ? (
     <React.Fragment>
-      <Grid container direction="row">
-        {categoryList.map((category, index) => (
-          <ProductCard
-            title={category.name}
-            key={`${category.id}${index}`}
-            description={Str(category.description).limit(500, "...").get()}
-            //description={category.description}
-            image={category.image}
-            token={props.token}
-            userId={props.userId}
-          />
-        ))}
-      </Grid>
+      {
+        <Grid container direction="row">
+          {categoryList.map((category, index) => (
+            <ProductCard
+              title={category.name}
+              key={`${category.id}${index}`}
+              description={Str(category.description).limit(500, "...").get()}
+              //description={category.description}
+              image={category.image}
+              token={props.token}
+              userId={props.userId}
+            />
+          ))}
+        </Grid>
+      }
+    </React.Fragment>
+  ) : (
+    <React.Fragment>
+      {
+        <Grid
+          container
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+        >
+          {categoryList.map((category, index) => (
+            <ProductCard
+              title={category.name}
+              key={`${category.id}${index}`}
+              description={Str(category.description).limit(500, "...").get()}
+              //description={category.description}
+              image={category.image}
+              token={props.token}
+              userId={props.userId}
+            />
+          ))}
+        </Grid>
+      }
     </React.Fragment>
   );
 
@@ -365,49 +401,63 @@ const Marketplace = (props) => {
             direction="row"
           >
             <Grid sm item className={classes.heroTextContainer}>
-              <Typography variant="h2" align="center">
+              <Typography
+                variant={matchesSM ? "subtitle2" : "h2"}
+                align="center"
+              >
                 We are Africa's leading Logistics <br /> Marketplace
               </Typography>
-              <Grid
-                container
-                justifyContent="center"
-                className={classes.buttonContainer}
-              >
-                <Grid item>
-                  <Button
-                    // component={Link}
-                    // to="/estimate"
-                    className={classes.estimateButton}
-                    variant="contained"
-                    onClick={() => [
-                      setBecomePartnerOpen(true),
-                      history.push("/"),
-                    ]}
-                  >
-                    Become a Partner
-                  </Button>
+              {matchesMD ? (
+                <Grid
+                  container
+                  justifyContent="center"
+                  direction={matchesSM ? "column" : "row"}
+                  className={classes.buttonContainer}
+                >
+                  <Grid item>
+                    <Button
+                      // component={Link}
+                      // to="/estimate"
+                      className={classes.estimateButton}
+                      variant="contained"
+                      onClick={() => [
+                        setBecomePartnerOpen(true),
+                        history.push("/"),
+                      ]}
+                    >
+                      Become a Partner
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      // component={Link}
+                      // to="/revolution"
+                      variant="outlined"
+                      className={classes.visitPartnerButtonsite}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        //  history.push(`/orders/completed`);
+                        window.open("https://partners.brightwayafrica.com/");
+                      }}
+                    >
+                      <span
+                        style={{
+                          marginRight: 10,
+                        }}
+                      >
+                        {matchesSM ? "Partner Site" : "Visit Partner Site"}
+                      </span>
+                      <ButtonArrow
+                        width={15}
+                        height={15}
+                        fill={theme.palette.common.orange}
+                      />
+                    </Button>
+                  </Grid>
                 </Grid>
-                <Grid item>
-                  <Button
-                    // component={Link}
-                    // to="/revolution"
-                    variant="outlined"
-                    className={classes.visitPartnerButtonsite}
-                    onClick={(event) => {
-                      event.preventDefault();
-                      //  history.push(`/orders/completed`);
-                      window.open("https://partners.brightwayafrica.com/");
-                    }}
-                  >
-                    <span style={{ marginRight: 10 }}>Visit Partner Site </span>
-                    <ButtonArrow
-                      width={15}
-                      height={15}
-                      fill={theme.palette.common.orange}
-                    />
-                  </Button>
-                </Grid>
-              </Grid>
+              ) : (
+                <></>
+              )}
             </Grid>
             {/* <Grid sm item className={classes.animation}>
             <Lottie options={defaultOptions} height={"100%"} width={"100%"} />
@@ -445,23 +495,46 @@ const Marketplace = (props) => {
                 direction="column"
                 style={{ marginBottom: matchesXS ? "10em" : 0 }}
               >
-                <Typography variant="h2" style={{ color: "white" }}>
+                <Typography
+                  variant="h2"
+                  style={{
+                    color: "white",
+                    fontSize: matchesSM ? "1.75rem" : "2.5rem",
+                  }}
+                >
                   About Us
                 </Typography>
-                <Typography variant="subtitle2">Let's get personal</Typography>
-                <Grid item>
-                  <Button
-                    // component={Link}
-                    // to="/about"
-                    varaint="outlined"
-                    className={classes.learnButton}
-                    onClick={() => [setAboutUsOpen(true), history.push("/")]}
-                    style={{ color: "white", borderColor: "white" }}
-                  >
-                    <span style={{ marginRight: 10 }}>Learn More </span>
-                    <ButtonArrow height={10} width={10} fill="white" />
-                  </Button>
-                </Grid>
+                {matchesMD ? (
+                  <Typography variant="subtitle2">
+                    Let's get personal
+                  </Typography>
+                ) : (
+                  <Typography variant="subtitle2" style={{ fontSize: 14 }}>
+                    <span>
+                      We are a Logistics & Transportation Marketplace. <br /> We
+                      connect owners of Vehicles to Customers
+                      <br />
+                      that need them across Africa.
+                    </span>
+                  </Typography>
+                )}
+                {matchesMD ? (
+                  <Grid item>
+                    <Button
+                      // component={Link}
+                      // to="/about"
+                      varaint="outlined"
+                      className={classes.learnButton}
+                      onClick={() => [setAboutUsOpen(true), history.push("/")]}
+                      style={{ color: "white", borderColor: "white" }}
+                    >
+                      <span style={{ marginRight: 10 }}>Learn More </span>
+                      <ButtonArrow height={10} width={10} fill="white" />
+                    </Button>
+                  </Grid>
+                ) : (
+                  <></>
+                )}
                 <Dialog
                   //style={{ zIndex: 1302 }}
                   fullScreen={matchesXS}
@@ -489,23 +562,48 @@ const Marketplace = (props) => {
               }}
             >
               <Grid container direction="column">
-                <Typography variant="h2" style={{ color: "white" }}>
+                <Typography
+                  variant="h2"
+                  style={{
+                    color: "white",
+                    fontSize: matchesSM ? "1.75rem" : "2.5rem",
+                  }}
+                >
                   Contact Us
                 </Typography>
-                <Typography variant="subtitle2">Say hello!</Typography>
-                <Grid item>
-                  <Button
-                    // component={Link}
-                    // to="/contact"
-                    varaint="outlined"
-                    className={classes.learnButton}
-                    style={{ color: "white", borderColor: "white" }}
-                    onClick={() => [setContactUsOpen(true), history.push("/")]}
-                  >
-                    <span style={{ marginRight: 10 }}>Learn More </span>
-                    <ButtonArrow height={10} width={10} fill="white" />
-                  </Button>
-                </Grid>
+                {matchesMD ? (
+                  <Typography variant="subtitle2">Say hello!</Typography>
+                ) : (
+                  <Typography variant="subtitle2" style={{ fontSize: 14 }}>
+                    <span>12 Wharf Road, off Itapeju street Apapa, Lagos</span>
+                    <br />
+
+                    <span>marketplace@brightwayafrica.com</span>
+                    <br />
+
+                    <span>+234 809 429 8412, +234 809 835 4000</span>
+                  </Typography>
+                )}
+                {matchesMD ? (
+                  <Grid item>
+                    <Button
+                      // component={Link}
+                      // to="/contact"
+                      varaint="outlined"
+                      className={classes.learnButton}
+                      style={{ color: "white", borderColor: "white" }}
+                      onClick={() => [
+                        setContactUsOpen(true),
+                        history.push("/"),
+                      ]}
+                    >
+                      <span style={{ marginRight: 10 }}>Learn More </span>
+                      <ButtonArrow height={10} width={10} fill="white" />
+                    </Button>
+                  </Grid>
+                ) : (
+                  <></>
+                )}
                 <Dialog
                   //style={{ zIndex: 1302 }}
                   fullScreen={matchesXS}

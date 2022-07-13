@@ -122,7 +122,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerItem: {
     ...theme.typography.tab,
-    color: "blue",
+    color: "white",
     opacity: 0.7,
   },
   drawerItemEstimate: {
@@ -159,6 +159,8 @@ const Header = (props) => {
     /iPad|iPhone|iPod/.test(navigator.userAgent);
   const matches = useMediaQuery(theme.breakpoints.down("md"));
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
+  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
+  const matchesMDUp = useMediaQuery(theme.breakpoints.up("md"));
   const [openDrawer, setOpenDrawer] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -300,13 +302,15 @@ const Header = (props) => {
 
   const menuOptions = [];
 
-  const routes = [
-    { name: "Marketplace", link: "/", activeIndex: 0 },
+  const routes = matches
+    ? [{ name: "Marketplace", link: "/", activeIndex: 0 }]
+    : [
+        { name: "Marketplace", link: "/", activeIndex: 0 },
 
-    { name: "Orders", link: "/orders", activeIndex: 1 },
-    { name: "Payments", link: "/payments", activeIndex: 2 },
-    { name: "Profile", link: "/profile", activeIndex: 3 },
-  ];
+        { name: "Orders", link: "/orders", activeIndex: 1 },
+        { name: "Payments", link: "/payments", activeIndex: 2 },
+        { name: "Profile", link: "/profile", activeIndex: 3 },
+      ];
 
   //   useEffect(() => {
   //
@@ -538,7 +542,6 @@ const Header = (props) => {
   );
 
   const renderLoginForm = () => {
-    console.log("token at login form:", props.token);
     return (
       <Dialog
         //style={{ zIndex: 1302 }}
@@ -798,16 +801,22 @@ const Header = (props) => {
             divider
             button
             component={Link}
-            to="/estimate"
+            to="/"
             classes={{
               root: classes.drawerItemEstimate,
               selected: classes.drawerItemSelected,
             }}
             selected={props.value === 5}
           >
-            <ListItemText className={classes.drawerItem} disableTypography>
-              Estimate
-            </ListItemText>
+            {props.token === undefined ? (
+              <ListItemText className={classes.drawerItem} disableTypography>
+                Sign In
+              </ListItemText>
+            ) : (
+              <ListItemText className={classes.drawerItem} disableTypography>
+                Sign Out
+              </ListItemText>
+            )}
           </ListItem>
         </List>
       </SwipeableDrawer>
