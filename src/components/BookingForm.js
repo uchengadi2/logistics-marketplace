@@ -19,6 +19,7 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import history from "../history";
 import data from "./../apis/local";
 
 const useStyles = makeStyles((theme) => ({
@@ -1675,6 +1676,25 @@ function BookingForm(props) {
                 buttonContent()
               )}
             </Button>
+            <Grid
+              container
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Grid item>
+                <Button
+                  variant="text"
+                  onClick={() => [
+                    props.handleBookingsOpenDialogStatus(),
+                    history.push("/"),
+                  ]}
+                  style={{ marginRight: 50 }}
+                >
+                  <span style={{ fontSize: 10 }}>Cancel</span>
+                </Button>
+              </Grid>
+            </Grid>
           </Box>
         </>
       )}
