@@ -98,6 +98,7 @@ export default function ProductCard(props) {
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
+  const matchesMDUp = useMediaQuery(theme.breakpoints.up("md"));
 
   //const imageUrl = `${baseURL}/images/categories/${props.image}`;
   const imageUrl = `${baseURL}/images/categories/${props.image}`;
@@ -184,17 +185,22 @@ export default function ProductCard(props) {
         }}
       >
         <DialogContent>
-          <Card className={classes.dialog}>
-            <CardActionArea>
-              <CardMedia
-                className={classes.media}
-                component="img"
-                alt={props.alt}
-                image={imageUrl}
-                crossOrigin="anonymous"
-              />
-            </CardActionArea>
-          </Card>
+          {matchesMDUp ? (
+            <Card className={classes.dialog}>
+              <CardActionArea>
+                <CardMedia
+                  className={classes.media}
+                  component="img"
+                  alt={props.alt}
+                  image={imageUrl}
+                  crossOrigin="anonymous"
+                />
+              </CardActionArea>
+            </Card>
+          ) : (
+            <></>
+          )}
+
           <Bookings
             token={props.token}
             userId={props.userId}

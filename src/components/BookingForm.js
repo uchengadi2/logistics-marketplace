@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import { TextField } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Box from "@material-ui/core/Box";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { Typography } from "@mui/material";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
@@ -40,10 +41,27 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.common.blue,
     },
   },
+  submitButtonMobile: {
+    borderRadius: 10,
+    height: 30,
+    width: 120,
+    marginLeft: 80,
+    marginTop: 20,
+    marginBottom: 20,
+    color: "white",
+    backgroundColor: theme.palette.common.blue,
+    "&:hover": {
+      backgroundColor: theme.palette.common.blue,
+    },
+  },
 }));
 
 function BookingForm(props) {
   const classes = useStyles();
+  const theme = useTheme();
+  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
+  const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
+  const matchesMD = useMediaQuery(theme.breakpoints.up("md"));
   const [quantity, setQuantity] = useState("");
   const [country, setCountry] = useState("");
   const [customer, setCustomer] = useState();
@@ -394,7 +412,7 @@ function BookingForm(props) {
             value={category}
             onChange={handleCategoryChange}
             label="Category"
-            style={{ marginTop: 20, width: 280 }}
+            style={{ marginTop: 20, width: matchesMD ? 280 : 300 }}
             {...input}
           >
             {renderCategoryList()}
@@ -505,7 +523,7 @@ function BookingForm(props) {
             value={sourceCity}
             onChange={handleConsignmentSourceCityChange}
             label="Consignment Source City"
-            style={{ width: 150 }}
+            style={{ width: matchesMD ? 150 : 300 }}
             {...input}
           >
             {renderSourceCityList()}
@@ -534,7 +552,7 @@ function BookingForm(props) {
             value={destinationCity}
             onChange={handleConsignmentDestinationCityChange}
             label="Consignment Destination City"
-            style={{ width: 150 }}
+            style={{ width: matchesMD ? 150 : 300 }}
             {...input}
           >
             {renderDestinationCityList()}
@@ -563,7 +581,7 @@ function BookingForm(props) {
             value={sourceState}
             onChange={handleConsignmentSourceStateChange}
             label="Consignment Source State"
-            style={{ width: 150 }}
+            style={{ width: matchesMD ? 150 : 300 }}
             {...input}
           >
             {renderSourceStateList()}
@@ -592,7 +610,7 @@ function BookingForm(props) {
             value={destinationState}
             onChange={handleConsignmentDestinationStateChange}
             label="Consignment Destination State"
-            style={{ width: 150 }}
+            style={{ width: matchesMD ? 150 : 300 }}
             {...input}
           >
             {renderDestinationStateList()}
@@ -621,7 +639,7 @@ function BookingForm(props) {
             value={sourceCountry}
             onChange={handleConsignmentSourceCountryChange}
             label="Consignment Source Country"
-            style={{ width: 150 }}
+            style={{ width: matchesMD ? 150 : 300 }}
             {...input}
           >
             {renderSourceCountryList()}
@@ -650,7 +668,7 @@ function BookingForm(props) {
             value={destinationCountry}
             onChange={handleConsignmentDestinationCountryChange}
             label="Consignment Destination Country"
-            style={{ width: 150 }}
+            style={{ width: matchesMD ? 150 : 300 }}
             {...input}
           >
             {renderDestinationCountryList()}
@@ -915,7 +933,7 @@ function BookingForm(props) {
             value={logisticsInsuranceType}
             onChange={handleLogisticsInsuranceTypeChange}
             label="Logistics Insurance Type"
-            style={{ width: 500, marginTop: 0 }}
+            style={{ width: matchesMD ? 500 : 300, marginTop: 0 }}
             {...input}
           >
             <MenuItem value={"notApplicable"}>Not Applicable</MenuItem>
@@ -979,7 +997,7 @@ function BookingForm(props) {
             value={sourcePlaceType}
             onChange={handleSourcePlaceTypeChange}
             label="Source Place Type"
-            style={{ width: 500, marginTop: 10 }}
+            style={{ width: matchesMD ? 500 : 300, marginTop: 10 }}
             {...input}
           >
             <MenuItem value={"warehouse"}>Warehouse</MenuItem>
@@ -1027,7 +1045,7 @@ function BookingForm(props) {
             value={destinationPlaceType}
             onChange={handleDestinationPlaceTypeChange}
             label="Destination Place Type"
-            style={{ width: 500, marginTop: 10 }}
+            style={{ width: matchesMD ? 500 : 300, marginTop: 10 }}
             {...input}
           >
             <MenuItem value={"warehouse"}>Warehouse</MenuItem>
@@ -1120,32 +1138,38 @@ function BookingForm(props) {
   };
 
   const buttonContent = () => {
-    return <React.Fragment>Place Order</React.Fragment>;
+    return matchesMD ? (
+      <React.Fragment>Place Order</React.Fragment>
+    ) : (
+      <div style={{ fontSize: "0.65rem" }}>Place Order</div>
+    );
   };
 
   return (
     <div className={classes.root}>
       <Grid item container justifyContent="center">
         <FormLabel
-          style={{ color: "blue", fontSize: "1.5em" }}
+          style={{ color: "blue", fontSize: matchesMD ? "1.5em" : "1.15em" }}
           component="legend"
         >
           Order/Booking Details
         </FormLabel>
       </Grid>
-      <Box
-        component="form"
-        id="orderForm"
-        // onSubmit={onSubmit}
-        sx={{
-          width: 500,
-          height: 420,
-        }}
-        noValidate
-        autoComplete="off"
-        style={{ marginTop: 20 }}
-      >
-        {/* <Grid container direction="row" style={{ marginTop: 20 }}>
+
+      {matchesMD ? (
+        <Box
+          component="form"
+          id="orderForm"
+          // onSubmit={onSubmit}
+          sx={{
+            width: 500,
+            height: 420,
+          }}
+          noValidate
+          autoComplete="off"
+          style={{ marginTop: 20 }}
+        >
+          {/* <Grid container direction="row" style={{ marginTop: 20 }}>
           <Grid item style={{ width: "40%" }}>
             <Field
               label=""
@@ -1165,226 +1189,226 @@ function BookingForm(props) {
             />
           </Grid>
         </Grid> */}
-        <Grid container direction="row">
-          <Grid item style={{ width: "51%" }}>
-            <Field
-              label=""
-              id="category"
-              name="category"
-              type="text"
-              component={renderCategoryField}
-              // style={{ marginTop: 15 }}
-            />
+          <Grid container direction="row">
+            <Grid item style={{ width: "51%" }}>
+              <Field
+                label=""
+                id="category"
+                name="category"
+                type="text"
+                component={renderCategoryField}
+                // style={{ marginTop: 15 }}
+              />
+            </Grid>
+            <Grid item style={{ width: "43%", marginLeft: 30 }}>
+              <Field
+                label=""
+                id="orderQuantity"
+                name="orderQuantity"
+                type="number"
+                component={renderVehicleQuantityField}
+                style={{ marginTop: 20 }}
+              />
+            </Grid>
           </Grid>
-          <Grid item style={{ width: "43%", marginLeft: 30 }}>
-            <Field
-              label=""
-              id="orderQuantity"
-              name="orderQuantity"
-              type="number"
-              component={renderVehicleQuantityField}
-              style={{ marginTop: 20 }}
-            />
-          </Grid>
-        </Grid>
 
-        <FormLabel
-          style={{ color: "blue", marginTop: 15, fontSize: "1.2em" }}
-          component="legend"
-        >
-          Enter Consignment Details
-        </FormLabel>
-        <Field
-          label=""
-          id="consignmentOwner"
-          name="consignmentOwner"
-          type="text"
-          component={renderConsignmentOwnerField}
-          style={{ marginTop: 15 }}
-        />
-        <Grid container direction="row" style={{ marginTop: 10 }}>
-          <Grid item style={{ width: "60%" }}>
-            <Field
-              label=""
-              id="consignmentType"
-              name="consignmentType"
-              type="text"
-              component={renderConsignmentType}
-            />
+          <FormLabel
+            style={{ color: "blue", marginTop: 15, fontSize: "1.2em" }}
+            component="legend"
+          >
+            Enter Consignment Details
+          </FormLabel>
+          <Field
+            label=""
+            id="consignmentOwner"
+            name="consignmentOwner"
+            type="text"
+            component={renderConsignmentOwnerField}
+            style={{ marginTop: 15 }}
+          />
+          <Grid container direction="row" style={{ marginTop: 10 }}>
+            <Grid item style={{ width: "60%" }}>
+              <Field
+                label=""
+                id="consignmentType"
+                name="consignmentType"
+                type="text"
+                component={renderConsignmentType}
+              />
+            </Grid>
+            <Grid item style={{ width: "39%", marginLeft: 5 }}>
+              <Field
+                label=""
+                id="consignmentWeight"
+                name="consignmentWeight"
+                type="number"
+                component={renderWeightinKg}
+              />
+            </Grid>
           </Grid>
-          <Grid item style={{ width: "39%", marginLeft: 5 }}>
-            <Field
-              label=""
-              id="consignmentWeight"
-              name="consignmentWeight"
-              type="number"
-              component={renderWeightinKg}
-            />
+          <Field
+            label=""
+            id="consignmentDescription"
+            name="consignmentDescription"
+            type="text"
+            component={renderConsignmentDescriptionField}
+          />
+          <FormLabel
+            style={{ color: "blue", marginTop: 15, fontSize: "1em" }}
+            component="legend"
+          >
+            Enter Consignment Source Location Details
+          </FormLabel>
+          <Grid container direction="row" style={{ marginTop: 10 }}>
+            <Grid item style={{ width: "59%" }}>
+              <Field
+                label=""
+                id="sourceContactPersonName"
+                name="sourceContactPersonName"
+                type="text"
+                component={renderConsignmentSourceContactPerson}
+              />
+            </Grid>
+            <Grid item style={{ width: "39%", marginLeft: 5 }}>
+              <Field
+                label=""
+                id="sourceContactPersonPhoneNumber"
+                name="sourceContactPersonPhoneNumber"
+                type="text"
+                component={renderConsignmentSourceContactPhoneNumber}
+              />
+            </Grid>
           </Grid>
-        </Grid>
-        <Field
-          label=""
-          id="consignmentDescription"
-          name="consignmentDescription"
-          type="text"
-          component={renderConsignmentDescriptionField}
-        />
-        <FormLabel
-          style={{ color: "blue", marginTop: 15, fontSize: "1em" }}
-          component="legend"
-        >
-          Enter Consignment Source Location Details
-        </FormLabel>
-        <Grid container direction="row" style={{ marginTop: 10 }}>
-          <Grid item style={{ width: "59%" }}>
-            <Field
-              label=""
-              id="sourceContactPersonName"
-              name="sourceContactPersonName"
-              type="text"
-              component={renderConsignmentSourceContactPerson}
-            />
+          <Field
+            label=""
+            id="consignmentSourceAddress"
+            name="consignmentSourceAddress"
+            type="text"
+            component={renderConsignmentLocationAddressField}
+          />
+          <Grid container direction="row" style={{ marginTop: 15 }}>
+            <Grid item style={{ width: "30%" }}>
+              <Field
+                label=""
+                id="consignmentCountry"
+                name="consignmentCountry"
+                type="text"
+                component={renderConsignmentSourceCountryField}
+              />
+            </Grid>
+            <Grid item style={{ width: "33%", marginLeft: 10 }}>
+              <Field
+                label=""
+                id="consignmentsourcestate"
+                name="consignmentsourcestate"
+                type="text"
+                component={renderConsignmentSourceStateField}
+              />
+            </Grid>
+            <Grid item style={{ width: "33%", marginLeft: 10 }}>
+              <Field
+                label=""
+                id="sourceCity"
+                name="sourceCity"
+                type="text"
+                component={renderConsignmentSourceCityField}
+              />
+            </Grid>
           </Grid>
-          <Grid item style={{ width: "39%", marginLeft: 5 }}>
-            <Field
-              label=""
-              id="sourceContactPersonPhoneNumber"
-              name="sourceContactPersonPhoneNumber"
-              type="text"
-              component={renderConsignmentSourceContactPhoneNumber}
-            />
-          </Grid>
-        </Grid>
-        <Field
-          label=""
-          id="consignmentSourceAddress"
-          name="consignmentSourceAddress"
-          type="text"
-          component={renderConsignmentLocationAddressField}
-        />
-        <Grid container direction="row" style={{ marginTop: 15 }}>
-          <Grid item style={{ width: "30%" }}>
-            <Field
-              label=""
-              id="consignmentCountry"
-              name="consignmentCountry"
-              type="text"
-              component={renderConsignmentSourceCountryField}
-            />
-          </Grid>
-          <Grid item style={{ width: "33%", marginLeft: 10 }}>
-            <Field
-              label=""
-              id="consignmentsourcestate"
-              name="consignmentsourcestate"
-              type="text"
-              component={renderConsignmentSourceStateField}
-            />
-          </Grid>
-          <Grid item style={{ width: "33%", marginLeft: 10 }}>
-            <Field
-              label=""
-              id="sourceCity"
-              name="sourceCity"
-              type="text"
-              component={renderConsignmentSourceCityField}
-            />
-          </Grid>
-        </Grid>
-        <Field
-          label=""
-          id="sourcePlaceType"
-          name="sourcePlaceType"
-          type="text"
-          component={renderSourcePlaceTypeField}
-        />
+          <Field
+            label=""
+            id="sourcePlaceType"
+            name="sourcePlaceType"
+            type="text"
+            component={renderSourcePlaceTypeField}
+          />
 
-        <FormLabel
-          style={{ color: "blue", marginTop: 15, fontSize: "1em" }}
-          component="legend"
-        >
-          Enter Consignment Destination Location Details
-        </FormLabel>
-        <Grid container direction="row" style={{ marginTop: 10 }}>
-          <Grid item style={{ width: "59%" }}>
-            <Field
-              label=""
-              id="destinationContactPersonName"
-              name="destinationContactPersonName"
-              type="text"
-              component={renderConsignmentDestinationContactPerson}
-            />
+          <FormLabel
+            style={{ color: "blue", marginTop: 15, fontSize: "1em" }}
+            component="legend"
+          >
+            Enter Consignment Destination Location Details
+          </FormLabel>
+          <Grid container direction="row" style={{ marginTop: 10 }}>
+            <Grid item style={{ width: "59%" }}>
+              <Field
+                label=""
+                id="destinationContactPersonName"
+                name="destinationContactPersonName"
+                type="text"
+                component={renderConsignmentDestinationContactPerson}
+              />
+            </Grid>
+            <Grid item style={{ width: "39%", marginLeft: 5 }}>
+              <Field
+                label=""
+                id="destinationContactPersonPhoneNumber"
+                name="destinationContactPersonPhoneNumber"
+                type="text"
+                component={renderConsignmentDestinationContactPhoneNumber}
+              />
+            </Grid>
           </Grid>
-          <Grid item style={{ width: "39%", marginLeft: 5 }}>
-            <Field
-              label=""
-              id="destinationContactPersonPhoneNumber"
-              name="destinationContactPersonPhoneNumber"
-              type="text"
-              component={renderConsignmentDestinationContactPhoneNumber}
-            />
+          <Field
+            label=""
+            id="destinationAddress"
+            name="destinationAddress"
+            type="text"
+            component={renderConsignmentDestinationAddressField}
+          />
+          <Grid container direction="row" style={{ marginTop: 15 }}>
+            <Grid item style={{ width: "33%" }}>
+              <Field
+                label=""
+                id="consignmentDestinationCountry"
+                name="consignmentDestinationCountry"
+                type="text"
+                component={renderConsignmentDestinationCountryField}
+              />
+            </Grid>
+            <Grid item style={{ width: "31%", marginLeft: 10 }}>
+              <Field
+                label=""
+                id="consignmentDestinationState"
+                name="consignmentDestinationState"
+                type="text"
+                component={renderConsignmentDestinationStateField}
+              />
+            </Grid>
+            <Grid item style={{ width: "31%", marginLeft: 10 }}>
+              <Field
+                label=""
+                id="destinationCity"
+                name="destinationCity"
+                type="text"
+                component={renderConsignmentDestinationCityField}
+              />
+            </Grid>
           </Grid>
-        </Grid>
-        <Field
-          label=""
-          id="destinationAddress"
-          name="destinationAddress"
-          type="text"
-          component={renderConsignmentDestinationAddressField}
-        />
-        <Grid container direction="row" style={{ marginTop: 15 }}>
-          <Grid item style={{ width: "33%" }}>
-            <Field
-              label=""
-              id="consignmentDestinationCountry"
-              name="consignmentDestinationCountry"
-              type="text"
-              component={renderConsignmentDestinationCountryField}
-            />
-          </Grid>
-          <Grid item style={{ width: "31%", marginLeft: 10 }}>
-            <Field
-              label=""
-              id="consignmentDestinationState"
-              name="consignmentDestinationState"
-              type="text"
-              component={renderConsignmentDestinationStateField}
-            />
-          </Grid>
-          <Grid item style={{ width: "31%", marginLeft: 10 }}>
-            <Field
-              label=""
-              id="destinationCity"
-              name="destinationCity"
-              type="text"
-              component={renderConsignmentDestinationCityField}
-            />
-          </Grid>
-        </Grid>
-        <Field
-          label=""
-          id="destinationPlaceType"
-          name="destinationPlaceType"
-          type="text"
-          component={renderSourcePlaceTypeField}
-        />
-        <FormLabel
-          style={{ color: "blue", marginTop: 15, fontSize: "1em" }}
-          component="legend"
-        >
-          Insurance
-        </FormLabel>
-        <Grid container direction="row" style={{ marginTop: 10 }}>
-          <Grid item style={{ width: "100%" }}>
-            <Field
-              label=""
-              id="logisticsInsuranceType"
-              name="logisticsInsuranceType"
-              type="text"
-              component={renderLogisticsInsuranceTypeField}
-            />
-          </Grid>
-          {/* <Grid itemstyle={{ width: "30%", marginTop: 30, marginLeft: 10 }}>
+          <Field
+            label=""
+            id="destinationPlaceType"
+            name="destinationPlaceType"
+            type="text"
+            component={renderSourcePlaceTypeField}
+          />
+          <FormLabel
+            style={{ color: "blue", marginTop: 15, fontSize: "1em" }}
+            component="legend"
+          >
+            Insurance
+          </FormLabel>
+          <Grid container direction="row" style={{ marginTop: 10 }}>
+            <Grid item style={{ width: "100%" }}>
+              <Field
+                label=""
+                id="logisticsInsuranceType"
+                name="logisticsInsuranceType"
+                type="text"
+                component={renderLogisticsInsuranceTypeField}
+              />
+            </Grid>
+            {/* <Grid itemstyle={{ width: "30%", marginTop: 30, marginLeft: 10 }}>
             <Field
               label=""
               id="status"
@@ -1393,21 +1417,272 @@ function BookingForm(props) {
               component={renderOrderStatusField}
             />
           </Grid> */}
-        </Grid>
+          </Grid>
 
-        <Button
-          variant="contained"
-          className={classes.submitButton}
-          onClick={props.handleSubmit(onSubmit)}
-        >
-          {/* Place Order */}
-          {loading ? (
-            <CircularProgress size={30} color="inherit" />
-          ) : (
-            buttonContent()
-          )}
-        </Button>
-      </Box>
+          <Button
+            variant="contained"
+            className={classes.submitButton}
+            onClick={props.handleSubmit(onSubmit)}
+          >
+            {/* Place Order */}
+            {loading ? (
+              <CircularProgress size={30} color="inherit" />
+            ) : (
+              buttonContent()
+            )}
+          </Button>
+        </Box>
+      ) : (
+        <>
+          <Box
+            component="form"
+            id="orderForm"
+            // onSubmit={onSubmit}
+            sx={{
+              width: 300,
+              //height: 300,
+            }}
+            noValidate
+            autoComplete="off"
+            style={{ marginTop: 20 }}
+          >
+            {/* <Grid container direction="row" style={{ marginTop: 20 }}>
+        <Grid item style={{ width: "40%" }}>
+          <Field
+            label=""
+            id="orderNumber"
+            name="orderNumber"
+            type="text"
+            component={renderOrderNumberField}
+          />
+        </Grid>
+        <Grid item style={{ width: "55%", marginLeft: 10 }}>
+          <Field
+            label=""
+            id="consignmentName"
+            name="consignmentName"
+            type="text"
+            component={renderSelectNameField}
+          />
+        </Grid>
+      </Grid> */}
+
+            <Field
+              label=""
+              id="category"
+              name="category"
+              type="text"
+              component={renderCategoryField}
+              // style={{ marginTop: 15 }}
+            />
+            <Field
+              label=""
+              id="orderQuantity"
+              name="orderQuantity"
+              type="number"
+              component={renderVehicleQuantityField}
+              style={{ marginTop: 20 }}
+            />
+
+            <FormLabel
+              style={{ color: "blue", marginTop: 15, fontSize: "0.75em" }}
+              component="legend"
+            >
+              Enter Consignment Details
+            </FormLabel>
+            <Field
+              label=""
+              id="consignmentOwner"
+              name="consignmentOwner"
+              type="text"
+              component={renderConsignmentOwnerField}
+              style={{ marginTop: 15 }}
+            />
+
+            <Field
+              label=""
+              id="consignmentType"
+              name="consignmentType"
+              type="text"
+              component={renderConsignmentType}
+            />
+            <Field
+              label=""
+              id="consignmentWeight"
+              name="consignmentWeight"
+              type="number"
+              component={renderWeightinKg}
+            />
+
+            <Field
+              label=""
+              id="consignmentDescription"
+              name="consignmentDescription"
+              type="text"
+              component={renderConsignmentDescriptionField}
+            />
+            <FormLabel
+              style={{ color: "blue", marginTop: 15, fontSize: "0.75em" }}
+              component="legend"
+            >
+              Enter Consignment Source Location Details
+            </FormLabel>
+
+            <Field
+              label=""
+              id="sourceContactPersonName"
+              name="sourceContactPersonName"
+              type="text"
+              component={renderConsignmentSourceContactPerson}
+            />
+            <Field
+              label=""
+              id="sourceContactPersonPhoneNumber"
+              name="sourceContactPersonPhoneNumber"
+              type="text"
+              component={renderConsignmentSourceContactPhoneNumber}
+            />
+
+            <Field
+              label=""
+              id="consignmentSourceAddress"
+              name="consignmentSourceAddress"
+              type="text"
+              component={renderConsignmentLocationAddressField}
+            />
+
+            <Field
+              label=""
+              id="consignmentCountry"
+              name="consignmentCountry"
+              type="text"
+              component={renderConsignmentSourceCountryField}
+            />
+            <Field
+              label=""
+              id="consignmentsourcestate"
+              name="consignmentsourcestate"
+              type="text"
+              component={renderConsignmentSourceStateField}
+            />
+            <Field
+              label=""
+              id="sourceCity"
+              name="sourceCity"
+              type="text"
+              component={renderConsignmentSourceCityField}
+            />
+
+            <Field
+              label=""
+              id="sourcePlaceType"
+              name="sourcePlaceType"
+              type="text"
+              component={renderSourcePlaceTypeField}
+            />
+
+            <FormLabel
+              style={{ color: "blue", marginTop: 15, fontSize: "0.75em" }}
+              component="legend"
+            >
+              Enter Consignment Destination Location Details
+            </FormLabel>
+
+            <Field
+              label=""
+              id="destinationContactPersonName"
+              name="destinationContactPersonName"
+              type="text"
+              component={renderConsignmentDestinationContactPerson}
+            />
+            <Field
+              label=""
+              id="destinationContactPersonPhoneNumber"
+              name="destinationContactPersonPhoneNumber"
+              type="text"
+              component={renderConsignmentDestinationContactPhoneNumber}
+            />
+
+            <Field
+              label=""
+              id="destinationAddress"
+              name="destinationAddress"
+              type="text"
+              component={renderConsignmentDestinationAddressField}
+            />
+
+            <Field
+              label=""
+              id="consignmentDestinationCountry"
+              name="consignmentDestinationCountry"
+              type="text"
+              component={renderConsignmentDestinationCountryField}
+            />
+            <Field
+              label=""
+              id="consignmentDestinationState"
+              name="consignmentDestinationState"
+              type="text"
+              component={renderConsignmentDestinationStateField}
+            />
+            <Field
+              label=""
+              id="destinationCity"
+              name="destinationCity"
+              type="text"
+              component={renderConsignmentDestinationCityField}
+            />
+
+            <Field
+              label=""
+              id="destinationPlaceType"
+              name="destinationPlaceType"
+              type="text"
+              component={renderSourcePlaceTypeField}
+            />
+            <FormLabel
+              style={{ color: "blue", marginTop: 15, fontSize: "0.75em" }}
+              component="legend"
+            >
+              Insurance
+            </FormLabel>
+            <Grid container direction="row" style={{ marginTop: 10 }}>
+              <Grid item style={{ width: "100%" }}>
+                <Field
+                  label=""
+                  id="logisticsInsuranceType"
+                  name="logisticsInsuranceType"
+                  type="text"
+                  component={renderLogisticsInsuranceTypeField}
+                />
+              </Grid>
+              {/* <Grid itemstyle={{ width: "30%", marginTop: 30, marginLeft: 10 }}>
+          <Field
+            label=""
+            id="status"
+            name="status"
+            type="text"
+            component={renderOrderStatusField}
+          />
+        </Grid> */}
+            </Grid>
+
+            <Button
+              variant="contained"
+              className={classes.submitButtonMobile}
+              onClick={props.handleSubmit(onSubmit)}
+            >
+              {/* Place Order */}
+              {loading ? (
+                <CircularProgress size={30} color="inherit" />
+              ) : (
+                buttonContent()
+              )}
+            </Button>
+          </Box>
+        </>
+      )}
+
       {/* </form> */}
     </div>
   );
