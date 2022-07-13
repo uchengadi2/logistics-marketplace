@@ -35,8 +35,32 @@ const useStyles = makeStyles((theme) => ({
       width: 225,
     },
   },
+  sendButtonMobile: {
+    ...theme.typography.estimate,
+    borderRadius: 10,
+    height: 50,
+    width: 90,
+    marginLeft: 5,
+    marginTop: 10,
+    marginBottom: 10,
+    // fontSize: "1.25rem",
+    backgroundColor: theme.palette.common.blue,
+    color: "white",
+    "&:hover": {
+      backgroundColor: theme.palette.common.blue,
+    },
+    [theme.breakpoints.down("sm")]: {
+      height: 50,
+      width: 90,
+    },
+  },
   root: {
     maxWidth: 600,
+  },
+  rootMobile: {
+    maxWidth: 300,
+    marginTop: 150,
+    padding: 20,
   },
   background: {
     backgroundImage: `url(${background})`,
@@ -53,11 +77,39 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const renderTextField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      error={touched && invalid}
+      // helperText="Email"
+
+      variant="outlined"
+      placeholder={label}
+      // label={label}
+      defaultValue={input.value}
+      id={input.name}
+      fullWidth
+      type={type}
+      //{...input}
+      {...custom}
+      onChange={input.onChange}
+    />
+  );
+};
+
 const ForgotPasswordForm = (props) => {
   const classes = useStyles();
 
   const theme = useTheme();
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
+  const matchesMD = useMediaQuery(theme.breakpoints.up("md"));
   const [email, setEmail] = useState("");
   const [emailHelper, setEmailHelper] = useState("");
   const [password, setPassword] = useState("");
@@ -70,81 +122,128 @@ const ForgotPasswordForm = (props) => {
     props.handleLoginDialogOpenStatus();
   };
 
-  const renderTextField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        error={touched && invalid}
-        // helperText="Email"
-
-        variant="outlined"
-        placeholder={label}
-        // label={label}
-        id={input.name}
-        fullWidth
-        type={type}
-        {...input}
-        {...custom}
-      />
-    );
-  };
-
   const onSubmit = (formValues) => {
     props.onSubmit(formValues);
   };
 
   return (
-    <Box className={classes.root}>
-      <Grid item container justifyContent="center">
-        <FormLabel
-          style={{ color: "blue", fontSize: "1.5em" }}
-          component="legend"
-        >
-          {/* New Route Details */}
-        </FormLabel>
-      </Grid>
-      <Box
-        component="form"
-        id="ForgotPasswordForm"
-        // onSubmit={onSubmit}
-        sx={{
-          width: 520,
-          height: 140,
-        }}
-        noValidate
-        autoComplete="off"
-        // style={{ marginTop: 20 }}
-      >
-        <Grid container direction="row">
-          <Grid item style={{ wdith: "70%" }}>
-            <Field
-              label="Enter your registered email address"
-              id="email"
-              name="email"
-              type="text"
-              component={renderTextField}
-              style={{ marginTop: 10, width: 360 }}
-            />
-          </Grid>
-          <Grid item style={{ wdith: "25%" }}>
-            <Button
-              variant="contained"
-              className={classes.sendButton}
-              onClick={props.handleSubmit(onSubmit)}
+    <>
+      {matchesMD ? (
+        <Box className={classes.root}>
+          <Grid item container justifyContent="center">
+            <FormLabel
+              style={{ color: "blue", fontSize: "1.5em" }}
+              component="legend"
             >
-              Reset Password
-            </Button>
+              {/* New Route Details */}
+            </FormLabel>
           </Grid>
-        </Grid>
-      </Box>
-      {/* </form> */}
-    </Box>
+          <Box
+            component="form"
+            id="ForgotPasswordForm"
+            // onSubmit={onSubmit}
+            sx={{
+              width: 520,
+              height: 140,
+            }}
+            noValidate
+            autoComplete="off"
+            // style={{ marginTop: 20 }}
+          >
+            <Grid container direction="row">
+              <Grid item style={{ wdith: "70%" }}>
+                <Field
+                  label="Enter your registered email address"
+                  id="email"
+                  name="email"
+                  type="text"
+                  component={renderTextField}
+                  style={{ marginTop: 10, width: 360 }}
+                />
+              </Grid>
+              <Grid item style={{ wdith: "25%" }}>
+                <Button
+                  variant="contained"
+                  className={classes.sendButton}
+                  onClick={props.handleSubmit(onSubmit)}
+                >
+                  Reset Password
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
+          {/* </form> */}
+        </Box>
+      ) : (
+        <>
+          <Box className={classes.rootMobile}>
+            <Grid item container justifyContent="center">
+              <FormLabel
+                style={{ color: "blue", fontSize: "1.5em" }}
+                component="legend"
+              >
+                {/* New Route Details */}
+              </FormLabel>
+            </Grid>
+            <Box
+              component="form"
+              id="ForgotPasswordForm"
+              // onSubmit={onSubmit}
+              sx={{
+                width: 300,
+                height: 140,
+              }}
+              noValidate
+              autoComplete="off"
+              // style={{ marginTop: 20 }}
+            >
+              <Grid container direction="row">
+                <Grid item style={{ wdith: "60%" }}>
+                  <Field
+                    label="Enter your registered email address"
+                    id="email"
+                    name="email"
+                    type="text"
+                    component={renderTextField}
+                    style={{ marginTop: 10 }}
+                  />
+                </Grid>
+                <Grid item style={{ wdith: "35%" }}>
+                  <Button
+                    variant="contained"
+                    className={classes.sendButtonMobile}
+                    onClick={props.handleSubmit(onSubmit)}
+                  >
+                    Reset Password
+                  </Button>
+                </Grid>
+              </Grid>
+              <Grid
+                container
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Grid item style={{ wdith: "100%" }}>
+                  <Button
+                    variant="text"
+                    onClick={() => [
+                      props.handleMakeCloseForgotPasswordFormDialogStatus(),
+                      history.push("/"),
+                    ]}
+                  >
+                    <span style={{ fontSize: 10, marginRight: 50 }}>
+                      Cancel
+                    </span>
+                  </Button>
+                </Grid>
+              </Grid>
+            </Box>
+            {/* </form> */}
+          </Box>
+        </>
+      )}
+    </>
   );
 };
 

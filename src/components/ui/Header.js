@@ -245,6 +245,11 @@ const Header = (props) => {
     setOpenForgotPasswordForm(true);
     setOpenLoginForm(false);
   };
+  const handleMakeCloseForgotPasswordFormDialogStatus = () => {
+    // history.push("/categories/new");
+    setOpenForgotPasswordForm(false);
+    setOpenLoginForm(false);
+  };
   const handleMakeOpenSignUpDialogStatus = () => {
     // history.push("/categories/new");
     setOpenSignUpForm(true);
@@ -650,6 +655,9 @@ const Header = (props) => {
             }
             handleMakeOpenLoginFormDialogStatus={
               handleMakeOpenLoginFormDialogStatus
+            }
+            handleMakeCloseForgotPasswordFormDialogStatus={
+              handleMakeCloseForgotPasswordFormDialogStatus
             }
           />
         </DialogContent>

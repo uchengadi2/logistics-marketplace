@@ -59,6 +59,7 @@ const UserChangePasswordForm = (props) => {
 
   const theme = useTheme();
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
+  const matchesMD = useMediaQuery(theme.breakpoints.up("md"));
   const [open, setOpen] = useState(false);
 
   const renderTextField = ({
@@ -78,9 +79,11 @@ const UserChangePasswordForm = (props) => {
         id={input.name}
         fullWidth
         required={true}
+        defaultValue={input.value}
         type={type}
-        {...input}
+        //{...input}
         {...custom}
+        onChange={input.onChange}
       />
     );
   };
@@ -93,76 +96,151 @@ const UserChangePasswordForm = (props) => {
   };
 
   return (
-    <Box className={classes.root}>
-      <Grid item container justifyContent="center">
-        <FormLabel
-          style={{ color: "blue", fontSize: "1.5em" }}
-          component="legend"
-        >
-          <Typography variant="h5">Change Password</Typography>
-        </FormLabel>
-      </Grid>
-      <Box
-        component="div"
-        id="userChangePasswordForm"
-        // onSubmit={onSubmit}
-        sx={{
-          width: 350,
-          height: 340,
-        }}
-        noValidate
-        autoComplete="off"
-        // style={{ marginTop: 20 }}
-      >
-        <Grid
-          container
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-          style={{ marginTop: 15 }}
-        >
-          <Grid item>
-            <Field
-              label="Current Password"
-              id="passwordCurrent"
-              name="passwordCurrent"
-              type="password"
-              component={renderTextField}
-              style={{ marginTop: 10, width: 340 }}
-            />
+    <>
+      {matchesMD ? (
+        <Box className={classes.root}>
+          <Grid item container justifyContent="center">
+            <FormLabel
+              style={{ color: "blue", fontSize: "1.5em" }}
+              component="legend"
+            >
+              <Typography variant="h5">Change Password</Typography>
+            </FormLabel>
           </Grid>
-          <Grid item>
-            <Field
-              label="New Password"
-              id="password"
-              name="password"
-              //value={user.email || ""}
-              type="password"
-              component={renderTextField}
-              style={{ marginTop: 10, width: 340 }}
-            />
-          </Grid>
-          <Grid item>
-            <Field
-              label="Confirm Password"
-              id="passwordConfirm"
-              name="passwordConfirm"
-              //value={user.email || ""}
-              type="password"
-              component={renderTextField}
-              style={{ marginTop: 10, width: 340 }}
-            />
-          </Grid>
-          <Button
-            variant="contained"
-            className={classes.sendButton}
-            onClick={props.handleSubmit(onSubmit)}
+          <Box
+            component="div"
+            id="userChangePasswordForm"
+            // onSubmit={onSubmit}
+            sx={{
+              width: 350,
+              height: 340,
+            }}
+            noValidate
+            autoComplete="off"
+            // style={{ marginTop: 20 }}
           >
-            Submit
-          </Button>
+            <Grid
+              container
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+              style={{ marginTop: 15 }}
+            >
+              <Grid item>
+                <Field
+                  label="Current Password"
+                  id="passwordCurrent"
+                  name="passwordCurrent"
+                  type="password"
+                  component={renderTextField}
+                  style={{ marginTop: 10, width: 340 }}
+                />
+              </Grid>
+              <Grid item>
+                <Field
+                  label="New Password"
+                  id="password"
+                  name="password"
+                  //value={user.email || ""}
+                  type="password"
+                  component={renderTextField}
+                  style={{ marginTop: 10, width: 340 }}
+                />
+              </Grid>
+              <Grid item>
+                <Field
+                  label="Confirm Password"
+                  id="passwordConfirm"
+                  name="passwordConfirm"
+                  //value={user.email || ""}
+                  type="password"
+                  component={renderTextField}
+                  style={{ marginTop: 10, width: 340 }}
+                />
+              </Grid>
+              <Button
+                variant="contained"
+                className={classes.sendButton}
+                onClick={props.handleSubmit(onSubmit)}
+              >
+                Submit
+              </Button>
+            </Grid>
+          </Box>
+        </Box>
+      ) : (
+        <><Box className={classes.root}>
+        <Grid item container justifyContent="center">
+          <FormLabel
+            style={{ color: "blue", fontSize: "1.5em" }}
+            component="legend"
+          >
+            <Typography variant="h5">Change Password</Typography>
+          </FormLabel>
         </Grid>
-      </Box>
-    </Box>
+        <Box
+          component="div"
+          id="userChangePasswordForm"
+          // onSubmit={onSubmit}
+          sx={{
+            width: 350,
+            height: 340,
+          }}
+          noValidate
+          autoComplete="off"
+          // style={{ marginTop: 20 }}
+        >
+          <Grid
+            container
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+            style={{ marginTop: 15 }}
+          >
+            <Grid item>
+              <Field
+                label="Current Password"
+                id="passwordCurrent"
+                name="passwordCurrent"
+                type="password"
+                component={renderTextField}
+                style={{ marginTop: 10, width: 340 }}
+              />
+            </Grid>
+            <Grid item>
+              <Field
+                label="New Password"
+                id="password"
+                name="password"
+                //value={user.email || ""}
+                type="password"
+                component={renderTextField}
+                style={{ marginTop: 10, width: 340 }}
+              />
+            </Grid>
+            <Grid item>
+              <Field
+                label="Confirm Password"
+                id="passwordConfirm"
+                name="passwordConfirm"
+                //value={user.email || ""}
+                type="password"
+                component={renderTextField}
+                style={{ marginTop: 10, width: 340 }}
+              />
+            </Grid>
+            <Button
+              variant="contained"
+              className={classes.sendButton}
+              onClick={props.handleSubmit(onSubmit)}
+            >
+              Submit
+            </Button>
+          </Grid>
+        </Box>
+      </Box></>
+      )}
+    </>
   );
 };
 

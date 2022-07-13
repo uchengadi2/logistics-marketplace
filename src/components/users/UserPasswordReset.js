@@ -21,6 +21,9 @@ class UserPasswordReset extends React.Component {
           handleMakeOpenLoginFormDialogStatus={
             this.props.handleMakeOpenLoginFormDialogStatus
           }
+          handleMakeCloseForgotPasswordFormDialogStatus={
+            this.props.handleMakeCloseForgotPasswordFormDialogStatus
+          }
         />
       </div>
     );
