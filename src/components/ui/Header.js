@@ -188,6 +188,10 @@ const Header = (props) => {
     // history.push("/categories/new");
     setOpenLoginForm(false);
   };
+  const handleLoginDialogCloseStatus = () => {
+    // history.push("/categories/new");
+    setOpenLoginForm(false);
+  };
 
   const handleSuccessfulLoginDialogOpenStatusWithSnackbar = () => {
     // history.push("/categories/new");
@@ -556,6 +560,7 @@ const Header = (props) => {
             handleMakeCloseSignUpDialogStatus={
               handleMakeCloseSignUpDialogStatus
             }
+            handleLoginDialogCloseStatus={handleLoginDialogCloseStatus}
             handleMakeOpenForgotPasswordFormDialogStatus={
               handleMakeOpenForgotPasswordFormDialogStatus
             }
@@ -794,10 +799,11 @@ const Header = (props) => {
           </ListItem> */}
           <ListItem
             className={classes.drawerItemEstimate}
-            onClick={() => {
-              setOpenDrawer(false);
-              props.setValue(5);
-            }}
+            // onClick={() => {
+            //   setOpenDrawer(false);
+            //   props.setValue(5);
+            // }}
+            onClick={() => [setOpenLoginForm(true), history.push("/")]}
             divider
             button
             component={Link}

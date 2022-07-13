@@ -60,6 +60,9 @@ class UserLogin extends React.Component {
             handleMakeOpenSignUpDialogStatus={
               this.handleMakeOpenSignUpDialogStatus
             }
+            handleLoginDialogCloseStatus={
+              this.props.handleLoginDialogCloseStatus
+            }
             handleMakeCloseSignUpDialogStatus={
               this.handleMakeCloseSignUpDialogStatus
             }

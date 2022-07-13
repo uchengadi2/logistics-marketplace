@@ -35,8 +35,32 @@ const useStyles = makeStyles((theme) => ({
       width: 225,
     },
   },
+  sendButtonMobile: {
+    ...theme.typography.estimate,
+    borderRadius: 10,
+    height: 40,
+    width: 100,
+    marginLeft: 100,
+    marginTop: 30,
+    marginBottom: 10,
+    fontSize: "1rem",
+    backgroundColor: theme.palette.common.blue,
+    color: "white",
+    "&:hover": {
+      backgroundColor: theme.palette.common.blue,
+    },
+    [theme.breakpoints.down("sm")]: {
+      height: 40,
+      width: 100,
+    },
+  },
   root: {
     maxWidth: 600,
+  },
+  rootMobile: {
+    maxWidth: 300,
+    marginTop: 80,
+    padding: 20,
   },
   background: {
     backgroundImage: `url(${background})`,
@@ -58,6 +82,7 @@ const SignUpForm = (props) => {
 
   const theme = useTheme();
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
+  const matchesMD = useMediaQuery(theme.breakpoints.up("md"));
   const [email, setEmail] = useState("");
   const [emailHelper, setEmailHelper] = useState("");
   const [password, setPassword] = useState("");
@@ -98,11 +123,13 @@ const SignUpForm = (props) => {
         variant="outlined"
         //placeholder={label}
         // label={label}
+        defaultValue={input.value}
         id={input.name}
         fullWidth
         type={type}
-        {...input}
+        //{...input}
         {...custom}
+        onChange={input.onChange}
       />
     );
   };
@@ -122,12 +149,14 @@ const SignUpForm = (props) => {
         variant="outlined"
         //placeholder={label}
         // label={label}
+        defaultValue={input.value}
         id={input.name}
         fullWidth
         type={type}
         style={{ marginTop: "1em" }}
-        {...input}
+        //{...input}
         {...custom}
+        onChange={input.onChange}
       />
     );
   };
@@ -142,28 +171,30 @@ const SignUpForm = (props) => {
     return <React.Fragment>Sign Up</React.Fragment>;
   };
   return (
-    <Box className={classes.root}>
-      <Grid item container justifyContent="center">
-        <FormLabel
-          style={{ color: "blue", fontSize: "1.5em" }}
-          component="legend"
-        >
-          Sign Up Form
-        </FormLabel>
-      </Grid>
-      <Box
-        component="form"
-        id="loginForm"
-        // onSubmit={onSubmit}
-        sx={{
-          width: 350,
-          height: 480,
-        }}
-        noValidate
-        autoComplete="off"
-        // style={{ marginTop: 20 }}
-      >
-        {/* <Grid container direction="row" className={classes.background}>
+    <>
+      {matchesMD ? (
+        <Box className={classes.root}>
+          <Grid item container justifyContent="center">
+            <FormLabel
+              style={{ color: "blue", fontSize: "1.5em" }}
+              component="legend"
+            >
+              Sign Up Form
+            </FormLabel>
+          </Grid>
+          <Box
+            component="form"
+            id="loginForm"
+            // onSubmit={onSubmit}
+            sx={{
+              width: 350,
+              height: 480,
+            }}
+            noValidate
+            autoComplete="off"
+            // style={{ marginTop: 20 }}
+          >
+            {/* <Grid container direction="row" className={classes.background}>
           <Box
             sx={{
               width: 350,
@@ -174,69 +205,69 @@ const SignUpForm = (props) => {
           ></Box>
         </Grid> */}
 
-        <Field
-          label="Name"
-          id="name"
-          name="name"
-          type="text"
-          component={renderTextField}
-          style={{ marginTop: 10 }}
-        />
-        <Field
-          label="Email"
-          id="email"
-          name="email"
-          type="text"
-          component={renderTextField}
-          style={{ marginTop: 10 }}
-        />
+            <Field
+              label="Name"
+              id="name"
+              name="name"
+              type="text"
+              component={renderTextField}
+              style={{ marginTop: 10 }}
+            />
+            <Field
+              label="Email"
+              id="email"
+              name="email"
+              type="text"
+              component={renderTextField}
+              style={{ marginTop: 10 }}
+            />
 
-        <Field
-          label="Password"
-          id="password"
-          name="password"
-          type="password"
-          component={renderPasswordField}
-        />
-        <Field
-          label="Confirm Password"
-          id="confirmPassword"
-          name="confirmPassword"
-          type="password"
-          component={renderPasswordField}
-        />
+            <Field
+              label="Password"
+              id="password"
+              name="password"
+              type="password"
+              component={renderPasswordField}
+            />
+            <Field
+              label="Confirm Password"
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              component={renderPasswordField}
+            />
 
-        <Button
-          variant="contained"
-          className={classes.sendButton}
-          onClick={props.handleSubmit(onSubmit)}
-        >
-          {/* Sign Up */}
-          {loading ? (
-            <CircularProgress size={30} color="inherit" />
-          ) : (
-            buttonContent()
-          )}
-        </Button>
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
-          style={{ marginTop: 20 }}
-        >
-          <Grid item container alignItems="center">
             <Button
-              variant="text"
-              onClick={() => [
-                handleMakeOpenLoginFormDialogStatus(),
-                history.push("/"),
-              ]}
-              style={{ marginLeft: 30 }}
+              variant="contained"
+              className={classes.sendButton}
+              onClick={props.handleSubmit(onSubmit)}
             >
-              Already a customer? Click to Login
+              {/* Sign Up */}
+              {loading ? (
+                <CircularProgress size={30} color="inherit" />
+              ) : (
+                buttonContent()
+              )}
             </Button>
-          </Grid>
-          {/* <Grid
+            <Grid
+              container
+              direction="row"
+              justifyContent="center"
+              style={{ marginTop: 20 }}
+            >
+              <Grid item container alignItems="center">
+                <Button
+                  variant="text"
+                  onClick={() => [
+                    handleMakeOpenLoginFormDialogStatus(),
+                    history.push("/"),
+                  ]}
+                  style={{ marginLeft: 30 }}
+                >
+                  Already a customer? Click to Login
+                </Button>
+              </Grid>
+              {/* <Grid
             item
             container
             style={{ width: "25%", marginLeft: 10, fontSize: 10 }}
@@ -251,11 +282,142 @@ const SignUpForm = (props) => {
               Sign Up
             </Button>
           </Grid> */}
-        </Grid>
-        {/* {renderSignUpForm()} */}
-      </Box>
-      {/* </form> */}
-    </Box>
+            </Grid>
+            {/* {renderSignUpForm()} */}
+          </Box>
+          {/* </form> */}
+        </Box>
+      ) : (
+        <Box className={classes.rootMobile}>
+          <Grid item container justifyContent="center">
+            <FormLabel
+              style={{ color: "blue", fontSize: "1.15em" }}
+              component="legend"
+            >
+              Sign Up Form
+            </FormLabel>
+          </Grid>
+          <Box
+            component="form"
+            id="loginForm"
+            // onSubmit={onSubmit}
+            sx={{
+              width: 300,
+              //height: 480,
+            }}
+            noValidate
+            autoComplete="off"
+            // style={{ marginTop: 20 }}
+          >
+            {/* <Grid container direction="row" className={classes.background}>
+          <Box
+            sx={{
+              width: 350,
+              height: 180,
+            }}
+            noValidate
+            autoComplete="off"
+          ></Box>
+        </Grid> */}
+
+            <Field
+              label="Name"
+              id="name"
+              name="name"
+              type="text"
+              component={renderTextField}
+              style={{ marginTop: 10 }}
+            />
+            <Field
+              label="Email"
+              id="email"
+              name="email"
+              type="text"
+              component={renderTextField}
+              style={{ marginTop: 10 }}
+            />
+
+            <Field
+              label="Password"
+              id="password"
+              name="password"
+              type="password"
+              component={renderPasswordField}
+            />
+            <Field
+              label="Confirm Password"
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              component={renderPasswordField}
+            />
+
+            <Button
+              variant="contained"
+              className={classes.sendButtonMobile}
+              onClick={props.handleSubmit(onSubmit)}
+            >
+              {/* Sign Up */}
+              {loading ? (
+                <CircularProgress size={30} color="inherit" />
+              ) : (
+                buttonContent()
+              )}
+            </Button>
+            <Grid
+              container
+              direction="row"
+              justifyContent="center"
+              style={{ marginTop: 20 }}
+            >
+              <Grid item container alignItems="center">
+                <Button
+                  variant="text"
+                  onClick={() => [
+                    handleMakeOpenLoginFormDialogStatus(),
+                    history.push("/"),
+                  ]}
+                  style={{ marginLeft: 30 }}
+                >
+                  <span style={{ fontSize: 10 }}>
+                    Already a customer? Click to Login
+                  </span>
+                </Button>
+              </Grid>
+              <Grid item container alignItems="center" justifyContent="center">
+                <Button
+                  variant="text"
+                  onClick={() => [
+                    props.handleMakeCloseSignUpDialogStatus(),
+                    history.push("/"),
+                  ]}
+                  style={{ marginLeft: 30 }}
+                >
+                  <span style={{ fontSize: 10, marginRight: 50 }}>Cancel</span>
+                </Button>
+              </Grid>
+              {/* <Grid
+            item
+            container
+            style={{ width: "25%", marginLeft: 10, fontSize: 10 }}
+          >
+            <Button
+              variant="text"
+              onClick={() => [
+                handleMakeOpenSignUpDialogStatus(),
+                history.push("/"),
+              ]}
+            >
+              Sign Up
+            </Button>
+          </Grid> */}
+            </Grid>
+            {/* {renderSignUpForm()} */}
+          </Box>
+          {/* </form> */}
+        </Box>
+      )}
+    </>
   );
 };
 
