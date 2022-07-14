@@ -1071,7 +1071,6 @@ function BookingForm(props) {
   };
 
   const onSubmit = (formValues) => {
-    console.log("this is the token:", props.token);
     //prepare the data for submission
 
     setLoading(false);
@@ -1130,7 +1129,7 @@ function BookingForm(props) {
         },
       },
     };
-    //props.onSubmit(data, props.token);
+    props.onSubmit(data, props.token);
     setLoading(true);
   };
 
