@@ -31,8 +31,6 @@ import tanker from "./../logistic_assets/Tankers.png";
 import tippertruck from "./../logistic_assets/Tipper_Trucks.png";
 import towtruck from "./../logistic_assets/Tow_Truck.png";
 import cranetruck from "./../logistic_assets/crane truck2.png";
-import useToken from "../custom-hooks/useToken";
-import useUserId from "../custom-hooks/useUserId";
 import ButtonArrow from "./ui/ButtonArrow";
 import UserLogin from "./users/UserLogin";
 import UserSignUp from "./users/UserSignUp";
@@ -104,8 +102,9 @@ export default function ProductCard(props) {
   const [openLoginForm, setOpenLoginForm] = useState(false);
   const [openSignUpForm, setOpenSignUpForm] = useState(false);
   const [openForgotPasswordForm, setOpenForgotPasswordForm] = useState(false);
-  const { token, setToken } = useToken();
-  const { userId, setUserId } = useUserId();
+ 
+  // const { token, setToken } = useToken();
+  // const { userId, setUserId } = useUserId();
   const [expanded, setExpanded] = useState(false);
   const [alert, setAlert] = useState({
     open: false,
@@ -122,6 +121,8 @@ export default function ProductCard(props) {
   const imageUrl = `${baseURL}/images/categories/${props.image}`;
 
   const Str = require("@supercharge/strings");
+
+  console.log("the productcard props are:", props);
 
   // console.log(
   //   "this is description trim:",
@@ -217,6 +218,7 @@ export default function ProductCard(props) {
   //   setOpenLogOut(false);
   // };
   const renderLoginForm = () => {
+    console.log("inside loginform the productcard props are:", props);
     return (
       <Dialog
         //style={{ zIndex: 1302 }}

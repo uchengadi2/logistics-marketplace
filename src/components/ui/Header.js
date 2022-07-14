@@ -577,7 +577,6 @@ const Header = (props) => {
             }
             setToken={props.setToken}
             setUserId={props.setUserId}
-            confirmToken={props.token}
           />
         </DialogContent>
       </Dialog>

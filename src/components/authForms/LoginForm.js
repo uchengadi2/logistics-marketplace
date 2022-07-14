@@ -170,6 +170,7 @@ const LoginForm = (props) => {
 
   const onSubmit = (formValues) => {
     setLoading(false);
+    console.log("login form values:", formValues);
     props.onSubmit(formValues);
     setLoading(true);
   };

@@ -335,7 +335,7 @@ const Marketplace = (props) => {
     },
   ];
 
-  console.log("thsi is the categories list:", categoryList);
+  console.log("this is the marketplace props:", props);
   const Str = require("@supercharge/strings");
 
   const categoriesList = matchesMD ? (
@@ -376,6 +376,8 @@ const Marketplace = (props) => {
               image={category.image}
               token={props.token}
               userId={props.userId}
+              setToken={props.setToken}
+              setUserId={props.setUserId}
             />
           ))}
         </Grid>
