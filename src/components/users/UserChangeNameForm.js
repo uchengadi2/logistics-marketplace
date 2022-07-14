@@ -54,33 +54,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const renderTextField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      error={touched && invalid}
+      helperText={label}
+      variant="outlined"
+      id={input.name}
+      fullWidth
+      type={type}
+      defaultValue={input.value}
+      {...custom}
+      onChange={input.onChange}
+    />
+  );
+};
+
 const UserChangeNameForm = (props) => {
   const classes = useStyles();
 
   const theme = useTheme();
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
-
-  const renderTextField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        error={touched && invalid}
-        helperText={label}
-        variant="outlined"
-        id={input.name}
-        fullWidth
-        type={type}
-        {...input}
-        {...custom}
-      />
-    );
-  };
 
   const onSubmit = (formValues) => {
     props.onSubmit(props.userId, formValues, props.existingToken);

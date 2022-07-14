@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Box from "@material-ui/core/Box";
 
 import BookingForm from "./BookingForm";
+import UserLogin from "./users/UserLogin";
 import { createOrder } from "./../actions";
 
 class Bookings extends React.Component {
@@ -20,6 +21,7 @@ class Bookings extends React.Component {
     this.props.createOrder(formValues, token);
   };
   render() {
+   
     return (
       <Box>
         <BookingForm

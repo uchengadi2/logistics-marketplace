@@ -23,6 +23,9 @@ function App() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [value, setValue] = useState(0);
 
+  console.log("app js token value:", token);
+  console.log("app js user id value:", userId);
+
   return (
     <div className="wrapper">
       <ThemeProvider theme={theme}>
@@ -40,7 +43,12 @@ function App() {
 
           <Switch>
             <Route exact path="/">
-              <Marketplace token={token} userId={userId} />
+              <Marketplace
+                token={token}
+                userId={userId}
+                setToken={setToken ? setToken : {}}
+                setUserId={setUserId ? setUserId : {}}
+              />
             </Route>
             <Route path="/orders">
               <OrderLayout token={token} />

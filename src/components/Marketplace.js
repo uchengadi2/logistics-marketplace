@@ -351,6 +351,8 @@ const Marketplace = (props) => {
               image={category.image}
               token={props.token}
               userId={props.userId}
+              setToken={props.setToken}
+              setUserId={props.setUserId}
             />
           ))}
         </Grid>

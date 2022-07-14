@@ -12,6 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import Snackbar from "@material-ui/core/Snackbar";
 import Collapse from "@material-ui/core/Collapse";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
@@ -30,8 +31,15 @@ import tanker from "./../logistic_assets/Tankers.png";
 import tippertruck from "./../logistic_assets/Tipper_Trucks.png";
 import towtruck from "./../logistic_assets/Tow_Truck.png";
 import cranetruck from "./../logistic_assets/crane truck2.png";
+import useToken from "../custom-hooks/useToken";
+import useUserId from "../custom-hooks/useUserId";
 import ButtonArrow from "./ui/ButtonArrow";
+import UserLogin from "./users/UserLogin";
+import UserSignUp from "./users/UserSignUp";
+import UserPasswordReset from "./users/UserPasswordReset";
 import Bookings from "./Bookings";
+import history from "../history";
+
 import { baseURL } from "./../apis/util";
 
 import theme from "./ui/Theme";
@@ -93,7 +101,17 @@ const useStyles = makeStyles((theme) => ({
 export default function ProductCard(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [openLoginForm, setOpenLoginForm] = useState(false);
+  const [openSignUpForm, setOpenSignUpForm] = useState(false);
+  const [openForgotPasswordForm, setOpenForgotPasswordForm] = useState(false);
+  const { token, setToken } = useToken();
+  const { userId, setUserId } = useUserId();
   const [expanded, setExpanded] = useState(false);
+  const [alert, setAlert] = useState({
+    open: false,
+    message: "",
+    backgroundColor: "",
+  });
   const theme = useTheme();
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
@@ -105,10 +123,10 @@ export default function ProductCard(props) {
 
   const Str = require("@supercharge/strings");
 
-  console.log(
-    "this is description trim:",
-    Str(props.description).limit(100, "...").get()
-  );
+  // console.log(
+  //   "this is description trim:",
+  //   Str(props.description).limit(100, "...").get()
+  // );
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -116,6 +134,181 @@ export default function ProductCard(props) {
   const handleBookingsOpenDialogStatus = () => {
     setOpen(false);
   };
+  const handleLoginDialogOpenStatus = () => {
+    // history.push("/categories/new");
+    setOpenLoginForm(false);
+  };
+
+  const handleLoginDialogCloseStatus = () => {
+    // history.push("/categories/new");
+    setOpenLoginForm(false);
+  };
+
+  const handleSuccessfulLoginDialogOpenStatusWithSnackbar = () => {
+    // history.push("/categories/new");
+    setOpenLoginForm(false);
+    setAlert({
+      open: true,
+      message: "You have successfully logged in",
+      backgroundColor: "#4BB543",
+    });
+  };
+
+  const handleFailedLoginDialogOpenStatusWithSnackbar = () => {
+    // history.push("/categories/new");
+    setAlert({
+      open: true,
+      message:
+        "Could not logged you in. Please ensure your login credentials are correct",
+      backgroundColor: "#FF3232",
+    });
+    setOpenLoginForm(false);
+  };
+
+  const handleSuccessfulSignUpDialogOpenStatusWithSnackbar = () => {
+    // history.push("/categories/new");
+    setOpenSignUpForm(false);
+    setAlert({
+      open: true,
+      message: "You have successfully signed up",
+      backgroundColor: "#4BB543",
+    });
+  };
+
+  const handleFailedSignUpDialogOpenStatusWithSnackbar = () => {
+    // history.push("/categories/new");
+    setAlert({
+      open: true,
+      message:
+        "Could not sign you up. Please ensure you are connected to the internet and all required fields are completed",
+      backgroundColor: "#FF3232",
+    });
+    setOpenSignUpForm(false);
+  };
+
+  const handleMakeOpenLoginFormDialogStatus = () => {
+    // history.push("/categories/new");
+    setOpenSignUpForm(false);
+    setOpenLoginForm(true);
+  };
+  const handleMakeOpenForgotPasswordFormDialogStatus = () => {
+    // history.push("/categories/new");
+    setOpenForgotPasswordForm(true);
+    setOpenLoginForm(false);
+  };
+  const handleMakeCloseForgotPasswordFormDialogStatus = () => {
+    // history.push("/categories/new");
+    setOpenForgotPasswordForm(false);
+    setOpenLoginForm(false);
+  };
+  const handleMakeOpenSignUpDialogStatus = () => {
+    // history.push("/categories/new");
+    setOpenSignUpForm(true);
+    setOpenLoginForm(false);
+  };
+
+  const handleMakeCloseSignUpDialogStatus = () => {
+    // history.push("/categories/new");
+    setOpenSignUpForm(false);
+  };
+
+  // const handleLogOutDialogOpenStatus = () => {
+  //   // history.push("/categories/new");
+  //   setOpenLogOut(false);
+  // };
+  const renderLoginForm = () => {
+    return (
+      <Dialog
+        //style={{ zIndex: 1302 }}
+        fullScreen={matchesXS}
+        open={openLoginForm}
+        onClose={() => [setOpenLoginForm(false), history.push("/")]}
+      >
+        <DialogContent>
+          <UserLogin
+            handleLoginDialogOpenStatus={handleLoginDialogOpenStatus}
+            handleMakeOpenSignUpDialogStatus={handleMakeOpenSignUpDialogStatus}
+            handleMakeCloseSignUpDialogStatus={
+              handleMakeCloseSignUpDialogStatus
+            }
+            handleLoginDialogCloseStatus={handleLoginDialogCloseStatus}
+            handleMakeOpenForgotPasswordFormDialogStatus={
+              handleMakeOpenForgotPasswordFormDialogStatus
+            }
+            handleSuccessfulLoginDialogOpenStatusWithSnackbar={
+              handleSuccessfulLoginDialogOpenStatusWithSnackbar
+            }
+            handleFailedLoginDialogOpenStatusWithSnackbar={
+              handleFailedLoginDialogOpenStatusWithSnackbar
+            }
+            setToken={props.setToken}
+            setUserId={props.setUserId}
+          />
+        </DialogContent>
+      </Dialog>
+    );
+  };
+
+  const renderSignUpForm = () => {
+    return (
+      <Dialog
+        //style={{ zIndex: 1302 }}
+        fullScreen={matchesXS}
+        open={openSignUpForm}
+        onClose={() => [setOpenSignUpForm(false), history.push("/")]}
+      >
+        <DialogContent>
+          <UserSignUp
+            token={props.token}
+            handleMakeOpenSignUpDialogStatus={handleMakeOpenSignUpDialogStatus}
+            handleMakeCloseSignUpDialogStatus={
+              handleMakeCloseSignUpDialogStatus
+            }
+            handleMakeOpenLoginFormDialogStatus={
+              handleMakeOpenLoginFormDialogStatus
+            }
+            handleSuccessfulSignUpDialogOpenStatusWithSnackbar={
+              handleSuccessfulSignUpDialogOpenStatusWithSnackbar
+            }
+            handleFailedSignUpDialogOpenStatusWithSnackbar={
+              handleFailedSignUpDialogOpenStatusWithSnackbar
+            }
+            setToken={props.setToken}
+            setUserId={props.setUserId}
+          />
+        </DialogContent>
+      </Dialog>
+    );
+  };
+
+  const renderForgotPasswordForm = () => {
+    return (
+      <Dialog
+        //style={{ zIndex: 1302 }}
+        fullScreen={matchesXS}
+        open={openForgotPasswordForm}
+        onClose={() => [setOpenForgotPasswordForm(false), history.push("/")]}
+      >
+        <DialogContent>
+          <UserPasswordReset
+            token={props.token}
+            userId={props.userId}
+            handleMakeOpenSignUpDialogStatus={handleMakeOpenSignUpDialogStatus}
+            handleMakeCloseSignUpDialogStatus={
+              handleMakeCloseSignUpDialogStatus
+            }
+            handleMakeOpenLoginFormDialogStatus={
+              handleMakeOpenLoginFormDialogStatus
+            }
+            handleMakeCloseForgotPasswordFormDialogStatus={
+              handleMakeCloseForgotPasswordFormDialogStatus
+            }
+          />
+        </DialogContent>
+      </Dialog>
+    );
+  };
+
   return (
     <Card className={classes.root}>
       <CardActionArea>
@@ -142,7 +335,9 @@ export default function ProductCard(props) {
           //   to="/mobileapps"
           //   varaint="outlined"
           className={classes.learnButton}
-          onClick={() => setOpen(true)}
+          onClick={() =>
+            props.token === undefined ? setOpenLoginForm(true) : setOpen(true)
+          }
           //   onClick={() => {
           //     props.setValue(1);
           //     props.setSelectedIndex(2);
@@ -208,6 +403,19 @@ export default function ProductCard(props) {
           />
         </DialogContent>
       </Dialog>
+      {renderLoginForm()}
+      {renderSignUpForm()}
+      {renderForgotPasswordForm()}
+      <Snackbar
+        open={alert.open}
+        message={alert.message}
+        ContentProps={{
+          style: { backgroundColor: alert.backgroundColor },
+        }}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        onClose={() => setAlert({ ...alert, open: false })}
+        autoHideDuration={4000}
+      />
     </Card>
   );
 }

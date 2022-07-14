@@ -79,6 +79,59 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const renderTextField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      error={touched && invalid}
+      helperText="Email"
+      variant="outlined"
+      //placeholder={label}
+      defaultValue={input.value}
+      label={label}
+      id={input.name}
+      fullWidth
+      type={type}
+      //{...input}
+      {...custom}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderPasswordField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      error={touched && invalid}
+      helperText="Password"
+      variant="outlined"
+      //placeholder={label}
+      defaultValue={input.value}
+      label={label}
+      id={input.name}
+      fullWidth
+      type={type}
+      style={{ marginTop: "1em" }}
+      //{...input}
+      {...custom}
+      onChange={input.onChange}
+    />
+  );
+};
+
 const LoginForm = (props) => {
   const classes = useStyles();
 
@@ -111,104 +164,8 @@ const LoginForm = (props) => {
     props.handleMakeOpenForgotPasswordFormDialogStatus();
   };
 
-  // const renderSignUpForm = () => {
-  //   return (
-  //     <Dialog
-  //       //style={{ zIndex: 1302 }}
-  //       fullScreen={matchesXS}
-  //       open={signUpOpen}
-  //       onClose={() => [
-  //         setSignUpOpen(false),
-  //         handleLoginDialogOpenStatus(),
-  //         history.push("/"),
-  //       ]}
-  //     >
-  //       <DialogContent>
-  //         <SignUpForm
-  //           token={props.token}
-  //           handleLoginDialogOpenStatus={handleLoginDialogOpenStatus}
-  //         />
-  //       </DialogContent>
-  //     </Dialog>
-  //   );
-  // };
-
-  // const handleFormChange = (event) => {
-  //   let loginParamsNew = { ...loginParams };
-  //   let val = event.target.value;
-  //   loginParamsNew[event.target.name] = val;
-  //   this.setState({
-  //     loginParams: loginParamsNew,
-  //   });
-  // };
-
-  // const login = (event) => {
-  //   let email = loginParams.email;
-  //   let user_password = loginParams.password;
-  //   if (email === "admin" && password === "123") {
-  //     localStorage.setItem("token", "T");
-  //     this.setState({
-  //       islogged: true,
-  //     });
-  //   }
-  //   event.preventDefault();
-  // };
-
   const buttonContent = () => {
     return <React.Fragment>Login</React.Fragment>;
-  };
-
-  const renderTextField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        error={touched && invalid}
-        helperText="Email"
-        variant="outlined"
-        //placeholder={label}
-        defaultValue={input.value}
-        label={label}
-        id={input.name}
-        fullWidth
-        type={type}
-        //{...input}
-        {...custom}
-        onChange={input.onChange}
-      />
-    );
-  };
-
-  const renderPasswordField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        error={touched && invalid}
-        helperText="Password"
-        variant="outlined"
-        //placeholder={label}
-        defaultValue={input.value}
-        label={label}
-        id={input.name}
-        fullWidth
-        type={type}
-        style={{ marginTop: "1em" }}
-        //{...input}
-        {...custom}
-        onChange={input.onChange}
-      />
-    );
   };
 
   const onSubmit = (formValues) => {

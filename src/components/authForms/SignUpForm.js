@@ -77,6 +77,59 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const renderTextField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      error={touched && invalid}
+      helperText={label}
+      variant="outlined"
+      //placeholder={label}
+      // label={label}
+      defaultValue={input.value}
+      id={input.name}
+      fullWidth
+      type={type}
+      //{...input}
+      {...custom}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderPasswordField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      error={touched && invalid}
+      helperText={label}
+      variant="outlined"
+      //placeholder={label}
+      // label={label}
+      defaultValue={input.value}
+      id={input.name}
+      fullWidth
+      type={type}
+      style={{ marginTop: "1em" }}
+      //{...input}
+      {...custom}
+      onChange={input.onChange}
+    />
+  );
+};
+
 const SignUpForm = (props) => {
   const classes = useStyles();
 
@@ -106,59 +159,6 @@ const SignUpForm = (props) => {
 
   const handleMakeOpenLoginFormDialogStatus = () => {
     props.handleMakeOpenLoginFormDialogStatus();
-  };
-
-  const renderTextField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        error={touched && invalid}
-        helperText={label}
-        variant="outlined"
-        //placeholder={label}
-        // label={label}
-        defaultValue={input.value}
-        id={input.name}
-        fullWidth
-        type={type}
-        //{...input}
-        {...custom}
-        onChange={input.onChange}
-      />
-    );
-  };
-
-  const renderPasswordField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        error={touched && invalid}
-        helperText={label}
-        variant="outlined"
-        //placeholder={label}
-        // label={label}
-        defaultValue={input.value}
-        id={input.name}
-        fullWidth
-        type={type}
-        style={{ marginTop: "1em" }}
-        //{...input}
-        {...custom}
-        onChange={input.onChange}
-      />
-    );
   };
 
   const onSubmit = (formValues) => {

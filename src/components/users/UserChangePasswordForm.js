@@ -54,6 +54,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const renderTextField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  console.log("this is the input details:", input);
+  return (
+    <TextField
+      error={touched && invalid}
+      helperText={label}
+      variant="outlined"
+      id={input.name}
+      fullWidth
+      required={true}
+      defaultValue={input.value}
+      type={type}
+      //{...input}
+      {...custom}
+      onChange={input.onChange}
+    />
+  );
+};
+
 const UserChangePasswordForm = (props) => {
   const classes = useStyles();
 
@@ -61,32 +87,6 @@ const UserChangePasswordForm = (props) => {
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
   const matchesMD = useMediaQuery(theme.breakpoints.up("md"));
   const [open, setOpen] = useState(false);
-
-  const renderTextField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    console.log("this is the input details:", input);
-    return (
-      <TextField
-        error={touched && invalid}
-        helperText={label}
-        variant="outlined"
-        id={input.name}
-        fullWidth
-        required={true}
-        defaultValue={input.value}
-        type={type}
-        //{...input}
-        {...custom}
-        onChange={input.onChange}
-      />
-    );
-  };
 
   const onSubmit = (formValues) => {
     if (formValues["password"] === formValues["passwordConfirm"]) {
@@ -169,76 +169,78 @@ const UserChangePasswordForm = (props) => {
           </Box>
         </Box>
       ) : (
-        <><Box className={classes.root}>
-        <Grid item container justifyContent="center">
-          <FormLabel
-            style={{ color: "blue", fontSize: "1.5em" }}
-            component="legend"
-          >
-            <Typography variant="h5">Change Password</Typography>
-          </FormLabel>
-        </Grid>
-        <Box
-          component="div"
-          id="userChangePasswordForm"
-          // onSubmit={onSubmit}
-          sx={{
-            width: 350,
-            height: 340,
-          }}
-          noValidate
-          autoComplete="off"
-          // style={{ marginTop: 20 }}
-        >
-          <Grid
-            container
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-            style={{ marginTop: 15 }}
-          >
-            <Grid item>
-              <Field
-                label="Current Password"
-                id="passwordCurrent"
-                name="passwordCurrent"
-                type="password"
-                component={renderTextField}
-                style={{ marginTop: 10, width: 340 }}
-              />
+        <>
+          <Box className={classes.root}>
+            <Grid item container justifyContent="center">
+              <FormLabel
+                style={{ color: "blue", fontSize: "1.5em" }}
+                component="legend"
+              >
+                <Typography variant="h5">Change Password</Typography>
+              </FormLabel>
             </Grid>
-            <Grid item>
-              <Field
-                label="New Password"
-                id="password"
-                name="password"
-                //value={user.email || ""}
-                type="password"
-                component={renderTextField}
-                style={{ marginTop: 10, width: 340 }}
-              />
-            </Grid>
-            <Grid item>
-              <Field
-                label="Confirm Password"
-                id="passwordConfirm"
-                name="passwordConfirm"
-                //value={user.email || ""}
-                type="password"
-                component={renderTextField}
-                style={{ marginTop: 10, width: 340 }}
-              />
-            </Grid>
-            <Button
-              variant="contained"
-              className={classes.sendButton}
-              onClick={props.handleSubmit(onSubmit)}
+            <Box
+              component="div"
+              id="userChangePasswordForm"
+              // onSubmit={onSubmit}
+              sx={{
+                width: 350,
+                height: 340,
+              }}
+              noValidate
+              autoComplete="off"
+              // style={{ marginTop: 20 }}
             >
-              Submit
-            </Button>
-          </Grid>
-        </Box>
-      </Box></>
+              <Grid
+                container
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+                style={{ marginTop: 15 }}
+              >
+                <Grid item>
+                  <Field
+                    label="Current Password"
+                    id="passwordCurrent"
+                    name="passwordCurrent"
+                    type="password"
+                    component={renderTextField}
+                    style={{ marginTop: 10, width: 340 }}
+                  />
+                </Grid>
+                <Grid item>
+                  <Field
+                    label="New Password"
+                    id="password"
+                    name="password"
+                    //value={user.email || ""}
+                    type="password"
+                    component={renderTextField}
+                    style={{ marginTop: 10, width: 340 }}
+                  />
+                </Grid>
+                <Grid item>
+                  <Field
+                    label="Confirm Password"
+                    id="passwordConfirm"
+                    name="passwordConfirm"
+                    //value={user.email || ""}
+                    type="password"
+                    component={renderTextField}
+                    style={{ marginTop: 10, width: 340 }}
+                  />
+                </Grid>
+                <Button
+                  variant="contained"
+                  className={classes.sendButton}
+                  onClick={props.handleSubmit(onSubmit)}
+                >
+                  Submit
+                </Button>
+              </Grid>
+            </Box>
+          </Box>
+        </>
       )}
     </>
   );
