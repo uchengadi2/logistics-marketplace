@@ -7,11 +7,13 @@ import Typography from "@material-ui/core/Typography";
 import ButtonArrow from "./ui/ButtonArrow";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Card from "@material-ui/core/Card";
+import Box from "@material-ui/core/Box";
 import CardContent from "@material-ui/core/CardContent";
 import { Link } from "react-router-dom";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import Snackbar from "@material-ui/core/Snackbar";
+import ReactPlayer from "react-player";
 
 import data from "./../apis/local";
 import CallToAction from "./ui/CallToAction";
@@ -43,10 +45,28 @@ import AboutUsFormContainer from "./aboutus/AboutUsFormContainer";
 import ContactUsContainerForm from "./contactus/ContactUsContainerForm";
 import BecomePartnerFormContainer from "./partner/BecomePartnerFormContainer";
 //import mobileBackground from "./../../assets/mobileBackground.jpg";
+import heroVideo from "./../assets/video/background_video.mp4";
 
 import { baseURL } from "./../apis/util";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+    height: "80vh",
+    // height: "100%",
+    position: "relative",
+    "& video": {
+      objectFit: "cover",
+    },
+  },
+  overlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100rem",
+    height: "42rem",
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
+  },
   animation: {
     // maxWidth: "100em",
     minWidth: "21em",
@@ -69,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   buttonContainer: {
-    marginTop: "1em",
+    marginTop: "2.5em",
   },
   learnButtonHero: {
     ...theme.typography.learnButton,
@@ -386,293 +406,334 @@ const Marketplace = (props) => {
   );
 
   return (
-    <Grid container direction="row" className={classes.mainContainer}>
-      <Grid
-        container
-        alignItems="center"
-        className={classes.background}
-        justifyContent={matchesSM ? "center" : "space-between"}
-        direction={matchesSM ? "column" : "row"}
-        style={{ marginTop: -100 }}
-      >
-        <Grid item>
-          {" "}
-          {/*..... HERO BLOCK.... */}
-          <Grid
-            container
-            justifyContent="flex-end"
-            alignItems="center"
-            direction="row"
-          >
-            <Grid sm item className={classes.heroTextContainer}>
-              <Typography
-                variant={matchesSM ? "subtitle2" : "h2"}
-                align="center"
-              >
-                We are Africa's leading Logistics <br /> Marketplace
-              </Typography>
-              {matchesMD ? (
-                <Grid
-                  container
-                  justifyContent="center"
-                  direction={matchesSM ? "column" : "row"}
-                  className={classes.buttonContainer}
-                >
-                  <Grid item>
-                    <Button
-                      // component={Link}
-                      // to="/estimate"
-                      className={classes.estimateButton}
-                      variant="contained"
-                      onClick={() => [
-                        setBecomePartnerOpen(true),
-                        history.push("/"),
-                      ]}
-                    >
-                      Become a Partner
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      // component={Link}
-                      // to="/revolution"
-                      variant="outlined"
-                      className={classes.visitPartnerButtonsite}
-                      onClick={(event) => {
-                        event.preventDefault();
-                        //  history.push(`/orders/completed`);
-                        window.open("https://partners.brightwayafrica.com/");
-                      }}
-                    >
-                      <span
-                        style={{
-                          marginRight: 10,
-                        }}
-                      >
-                        {matchesSM ? "Partner Site" : "Visit Partner Site"}
-                      </span>
-                      <ButtonArrow
-                        width={15}
-                        height={15}
-                        fill={theme.palette.common.orange}
-                      />
-                    </Button>
-                  </Grid>
-                </Grid>
-              ) : (
-                <></>
-              )}
-            </Grid>
-            {/* <Grid sm item className={classes.animation}>
-            <Lottie options={defaultOptions} height={"100%"} width={"100%"} />
-          </Grid> */}
-          </Grid>
-        </Grid>
-      </Grid>
-
-      <Grid item>{categoriesList}</Grid>
-
-      <Grid item style={{ width: "100%", marginTop: "20px" }}>
-        {" "}
-        {/*....INFORMATION BLOCK....*/}
+    <>
+      {/* <Grid container direction="row" className={classes.mainContainer}> */}
+      <Grid container direction="row" className={classes.root}>
+        {/* <section className={classes.root}> */}
         <Grid
           container
-          direction="row"
           alignItems="center"
-          style={{ height: "80em" }}
-          className={classes.infoBackground}
+          //className={classes.background}
+          justifyContent={matchesSM ? "center" : "space-between"}
+          direction={matchesSM ? "column" : "row"}
+          style={{ marginTop: -100 }}
         >
+          <Grid item>
+            {" "}
+            {/*..... HERO BLOCK.... */}
+            <Grid
+              container
+              //justifyContent="flex-end"
+              //alignItems="center"
+              direction="row"
+            >
+              <ReactPlayer
+                url={heroVideo}
+                playing
+                loop
+                muted
+                // width="100%"
+                // height="100%"
+                width="100rem"
+                height="49rem"
+              />
+              <div className={classes.overlay}>
+                <Box
+                  width="1000"
+                  height="100%"
+                  display="flex"
+                  flexDirection="column"
+                  //justifyContent="center"
+                  //alignItems="center"
+                  color="#fff"
+                >
+                  <Grid sm item className={classes.heroTextContainer}>
+                    <Typography
+                      variant={matchesSM ? "subtitle2" : "h2"}
+                      align="left"
+                      style={{ marginTop: "20rem" }}
+                    >
+                      We are Africa's leading Logistics <br />
+                      <span style={{ marginLeft: matchesSM ? 100 : 140 }}>
+                        Marketplace
+                      </span>
+                    </Typography>
+                    {matchesMD ? (
+                      <Grid
+                        container
+                        justifyContent="flex-start"
+                        direction={matchesSM ? "column" : "row"}
+                        className={classes.buttonContainer}
+                      >
+                        <Grid item>
+                          <Button
+                            // component={Link}
+                            // to="/estimate"
+                            className={classes.estimateButton}
+                            variant="contained"
+                            onClick={() => [
+                              setBecomePartnerOpen(true),
+                              history.push("/"),
+                            ]}
+                          >
+                            Become a Partner
+                          </Button>
+                        </Grid>
+                        <Grid item>
+                          <Button
+                            // component={Link}
+                            // to="/revolution"
+                            variant="outlined"
+                            className={classes.visitPartnerButtonsite}
+                            onClick={(event) => {
+                              event.preventDefault();
+                              //  history.push(`/orders/completed`);
+                              window.open(
+                                "https://partners.brightwayafrica.com/"
+                              );
+                            }}
+                          >
+                            <span
+                              style={{
+                                marginRight: 10,
+                              }}
+                            >
+                              {matchesSM
+                                ? "Partner Site"
+                                : "Visit Partner Site"}
+                            </span>
+                            <ButtonArrow
+                              width={15}
+                              height={15}
+                              fill={theme.palette.common.orange}
+                            />
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    ) : (
+                      <></>
+                    )}
+                  </Grid>
+                </Box>
+              </div>
+              {/* <Grid sm item className={classes.animation}>
+            <Lottie options={defaultOptions} height={"100%"} width={"100%"} />
+          </Grid> */}
+            </Grid>
+          </Grid>
+        </Grid>
+        {/* </section> */}
+        <Grid item>{categoriesList}</Grid>
+
+        <Grid item style={{ width: "100%", marginTop: "20px" }}>
+          {" "}
+          {/*....INFORMATION BLOCK....*/}
           <Grid
             container
-            style={{
-              textAlign: matchesXS ? "center" : "inherit",
-            }}
-            direction={matchesSM ? "column" : "row"}
+            direction="row"
+            alignItems="center"
+            style={{ height: "80em" }}
+            className={classes.infoBackground}
           >
             <Grid
-              item
-              sm
-              style={{ marginLeft: matchesXS ? 0 : matchesSM ? "2em" : "5em" }}
+              container
+              style={{
+                textAlign: matchesXS ? "center" : "inherit",
+              }}
+              direction={matchesSM ? "column" : "row"}
             >
               <Grid
-                container
-                direction="column"
-                style={{ marginBottom: matchesXS ? "10em" : 0 }}
+                item
+                sm
+                style={{
+                  marginLeft: matchesXS ? 0 : matchesSM ? "2em" : "5em",
+                }}
               >
-                <Typography
-                  variant="h2"
-                  style={{
-                    color: "white",
-                    fontSize: matchesSM ? "1.75rem" : "2.5rem",
-                  }}
+                <Grid
+                  container
+                  direction="column"
+                  style={{ marginBottom: matchesXS ? "10em" : 0 }}
                 >
-                  About Us
-                </Typography>
-                {matchesMD ? (
-                  <Typography variant="subtitle2">
-                    Let's get personal
+                  <Typography
+                    variant="h2"
+                    style={{
+                      color: "white",
+                      fontSize: matchesSM ? "1.75rem" : "2.5rem",
+                    }}
+                  >
+                    About Us
                   </Typography>
-                ) : (
-                  <Typography variant="subtitle2" style={{ fontSize: 14 }}>
-                    <span>
-                      We are a Logistics & Transportation Marketplace. <br /> We
-                      connect owners of Vehicles to Customers
-                      <br />
-                      that need them across Africa.
-                    </span>
-                  </Typography>
-                )}
-                {matchesMD ? (
-                  <Grid item>
-                    <Button
-                      // component={Link}
-                      // to="/about"
-                      varaint="outlined"
-                      className={classes.learnButton}
-                      onClick={() => [setAboutUsOpen(true), history.push("/")]}
-                      style={{ color: "white", borderColor: "white" }}
-                    >
-                      <span style={{ marginRight: 10 }}>Learn More </span>
-                      <ButtonArrow height={10} width={10} fill="white" />
-                    </Button>
-                  </Grid>
-                ) : (
-                  <></>
-                )}
-                <Dialog
-                  //style={{ zIndex: 1302 }}
-                  fullScreen={matchesXS}
-                  open={aboutUsOpen}
-                  onClose={() => [setAboutUsOpen(false), history.push("/")]}
-                  fullWidth
-                  maxWidth="md"
-                >
-                  <DialogContent>
-                    <AboutUsFormContainer
-                      token={props.token}
-                      // handleDialogOpenStatus={handleDialogOpenStatus}
-                    />
-                  </DialogContent>
-                </Dialog>
+                  {matchesMD ? (
+                    <Typography variant="subtitle2">
+                      Let's get personal
+                    </Typography>
+                  ) : (
+                    <Typography variant="subtitle2" style={{ fontSize: 14 }}>
+                      <span>
+                        We are a Logistics & Transportation Marketplace. <br />{" "}
+                        We connect owners of Vehicles to Customers
+                        <br />
+                        that need them across Africa.
+                      </span>
+                    </Typography>
+                  )}
+                  {matchesMD ? (
+                    <Grid item>
+                      <Button
+                        // component={Link}
+                        // to="/about"
+                        varaint="outlined"
+                        className={classes.learnButton}
+                        onClick={() => [
+                          setAboutUsOpen(true),
+                          history.push("/"),
+                        ]}
+                        style={{ color: "white", borderColor: "white" }}
+                      >
+                        <span style={{ marginRight: 10 }}>Learn More </span>
+                        <ButtonArrow height={10} width={10} fill="white" />
+                      </Button>
+                    </Grid>
+                  ) : (
+                    <></>
+                  )}
+                  <Dialog
+                    //style={{ zIndex: 1302 }}
+                    fullScreen={matchesXS}
+                    open={aboutUsOpen}
+                    onClose={() => [setAboutUsOpen(false), history.push("/")]}
+                    fullWidth
+                    maxWidth="md"
+                  >
+                    <DialogContent>
+                      <AboutUsFormContainer
+                        token={props.token}
+                        // handleDialogOpenStatus={handleDialogOpenStatus}
+                      />
+                    </DialogContent>
+                  </Dialog>
+                </Grid>
               </Grid>
-            </Grid>
 
-            <Grid
-              item
-              sm
-              style={{
-                marginRight: matchesXS ? 0 : matchesSM ? "2em" : "5em",
-                textAlign: matchesXS ? "center" : "right",
-              }}
-            >
-              <Grid container direction="column">
-                <Typography
-                  variant="h2"
-                  style={{
-                    color: "white",
-                    fontSize: matchesSM ? "1.75rem" : "2.5rem",
-                  }}
-                >
-                  Contact Us
-                </Typography>
-                {matchesMD ? (
-                  <Typography variant="subtitle2">Say hello!</Typography>
-                ) : (
-                  <Typography variant="subtitle2" style={{ fontSize: 14 }}>
-                    <span>12 Wharf Road, off Itapeju street Apapa, Lagos</span>
-                    <br />
-
-                    <span>marketplace@brightwayafrica.com</span>
-                    <br />
-
-                    <span>+234 809 429 8412, +234 809 835 4000</span>
+              <Grid
+                item
+                sm
+                style={{
+                  marginRight: matchesXS ? 0 : matchesSM ? "2em" : "5em",
+                  textAlign: matchesXS ? "center" : "right",
+                }}
+              >
+                <Grid container direction="column">
+                  <Typography
+                    variant="h2"
+                    style={{
+                      color: "white",
+                      fontSize: matchesSM ? "1.75rem" : "2.5rem",
+                    }}
+                  >
+                    Contact Us
                   </Typography>
-                )}
-                {matchesMD ? (
-                  <Grid item>
-                    <Button
-                      // component={Link}
-                      // to="/contact"
-                      varaint="outlined"
-                      className={classes.learnButton}
-                      style={{ color: "white", borderColor: "white" }}
-                      onClick={() => [
-                        setContactUsOpen(true),
-                        history.push("/"),
-                      ]}
-                    >
-                      <span style={{ marginRight: 10 }}>Learn More </span>
-                      <ButtonArrow height={10} width={10} fill="white" />
-                    </Button>
-                  </Grid>
-                ) : (
-                  <></>
-                )}
-                <Dialog
-                  //style={{ zIndex: 1302 }}
-                  fullScreen={matchesXS}
-                  open={contactUsOpen}
-                  onClose={() => [setContactUsOpen(false), history.push("/")]}
-                >
-                  <DialogContent>
-                    <ContactUsContainerForm
-                      token={props.token}
-                      // handleDialogOpenStatus={handleDialogOpenStatus}
-                    />
-                  </DialogContent>
-                </Dialog>
-                <Dialog
-                  //style={{ zIndex: 1302 }}
-                  fullScreen={matchesXS}
-                  open={becomePartnerOpen}
-                  onClose={() => [
-                    setBecomePartnerOpen(false),
-                    history.push("/"),
-                  ]}
-                >
-                  <DialogContent>
-                    <BecomePartnerFormContainer
-                      token={props.token}
-                      userId={props.userId}
-                      handleSuccessfulBecomeAPartnerOpenDialogBoxWithSnackbar={
-                        handleSuccessfulBecomeAPartnerOpenDialogBoxWithSnackbar
-                      }
-                      handleFailedBecomeAPartnerOpenDialogBoxWithSnackbar={
-                        handleFailedBecomeAPartnerOpenDialogBoxWithSnackbar
-                      }
-                    />
-                  </DialogContent>
-                </Dialog>
-                <Snackbar
-                  open={alert.open}
-                  message={alert.message}
-                  ContentProps={{
-                    style: { backgroundColor: alert.backgroundColor },
-                  }}
-                  anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                  onClose={() => setAlert({ ...alert, open: false })}
-                  autoHideDuration={4000}
-                />
+                  {matchesMD ? (
+                    <Typography variant="subtitle2">Say hello!</Typography>
+                  ) : (
+                    <Typography variant="subtitle2" style={{ fontSize: 14 }}>
+                      <span>
+                        12 Wharf Road, off Itapeju street Apapa, Lagos
+                      </span>
+                      <br />
+
+                      <span>marketplace@brightwayafrica.com</span>
+                      <br />
+
+                      <span>+234 809 429 8412, +234 809 835 4000</span>
+                    </Typography>
+                  )}
+                  {matchesMD ? (
+                    <Grid item>
+                      <Button
+                        // component={Link}
+                        // to="/contact"
+                        varaint="outlined"
+                        className={classes.learnButton}
+                        style={{ color: "white", borderColor: "white" }}
+                        onClick={() => [
+                          setContactUsOpen(true),
+                          history.push("/"),
+                        ]}
+                      >
+                        <span style={{ marginRight: 10 }}>Learn More </span>
+                        <ButtonArrow height={10} width={10} fill="white" />
+                      </Button>
+                    </Grid>
+                  ) : (
+                    <></>
+                  )}
+                  <Dialog
+                    //style={{ zIndex: 1302 }}
+                    fullScreen={matchesXS}
+                    open={contactUsOpen}
+                    onClose={() => [setContactUsOpen(false), history.push("/")]}
+                  >
+                    <DialogContent>
+                      <ContactUsContainerForm
+                        token={props.token}
+                        // handleDialogOpenStatus={handleDialogOpenStatus}
+                      />
+                    </DialogContent>
+                  </Dialog>
+                  <Dialog
+                    //style={{ zIndex: 1302 }}
+                    fullScreen={matchesXS}
+                    open={becomePartnerOpen}
+                    onClose={() => [
+                      setBecomePartnerOpen(false),
+                      history.push("/"),
+                    ]}
+                  >
+                    <DialogContent>
+                      <BecomePartnerFormContainer
+                        token={props.token}
+                        userId={props.userId}
+                        handleSuccessfulBecomeAPartnerOpenDialogBoxWithSnackbar={
+                          handleSuccessfulBecomeAPartnerOpenDialogBoxWithSnackbar
+                        }
+                        handleFailedBecomeAPartnerOpenDialogBoxWithSnackbar={
+                          handleFailedBecomeAPartnerOpenDialogBoxWithSnackbar
+                        }
+                      />
+                    </DialogContent>
+                  </Dialog>
+                  <Snackbar
+                    open={alert.open}
+                    message={alert.message}
+                    ContentProps={{
+                      style: { backgroundColor: alert.backgroundColor },
+                    }}
+                    anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                    onClose={() => setAlert({ ...alert, open: false })}
+                    autoHideDuration={4000}
+                  />
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
+        <Grid item style={{ width: "100%" }}>
+          {/*....CALL TO ACTION BLOCK ....*/}
+          <CallToAction
+            setValue={props.setValue}
+            token={props.token}
+            userId={props.userId}
+            handleSuccessfulBecomeAPartnerOpenDialogBoxWithSnackbar={
+              handleSuccessfulBecomeAPartnerOpenDialogBoxWithSnackbar
+            }
+            handleFailedBecomeAPartnerOpenDialogBoxWithSnackbar={
+              handleFailedBecomeAPartnerOpenDialogBoxWithSnackbar
+            }
+          />
+        </Grid>
       </Grid>
-      <Grid item style={{ width: "100%" }}>
-        {/*....CALL TO ACTION BLOCK ....*/}
-        <CallToAction
-          setValue={props.setValue}
-          token={props.token}
-          userId={props.userId}
-          handleSuccessfulBecomeAPartnerOpenDialogBoxWithSnackbar={
-            handleSuccessfulBecomeAPartnerOpenDialogBoxWithSnackbar
-          }
-          handleFailedBecomeAPartnerOpenDialogBoxWithSnackbar={
-            handleFailedBecomeAPartnerOpenDialogBoxWithSnackbar
-          }
-        />
-      </Grid>
-    </Grid>
+    </>
   );
 };
 
