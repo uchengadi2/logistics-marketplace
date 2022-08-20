@@ -64,9 +64,9 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     top: 0,
     left: 0,
-    width: "100rem",
+    width: "99rem",
     height: "42rem",
-    backgroundColor: "rgba(0, 0, 0, 0.4)",
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
   },
   animation: {
     // maxWidth: "100em",
@@ -435,12 +435,12 @@ const Marketplace = (props) => {
                 muted
                 // width="100%"
                 // height="100%"
-                width="100rem"
+                width="99rem"
                 height="49rem"
               />
               <div className={classes.overlay}>
                 <Box
-                  width="1000"
+                  width="100%"
                   height="100%"
                   display="flex"
                   flexDirection="column"
@@ -454,7 +454,11 @@ const Marketplace = (props) => {
                       align="left"
                       style={{ marginTop: "20rem" }}
                     >
-                      We are Africa's leading Logistics <br />
+                      <span style={{ marginLeft: matchesSM ? 20 : 5 }}>
+                        {" "}
+                        We are Africa's leading Logistics
+                      </span>{" "}
+                      <br />
                       <span style={{ marginLeft: matchesSM ? 100 : 140 }}>
                         Marketplace
                       </span>

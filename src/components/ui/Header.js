@@ -112,7 +112,8 @@ const useStyles = makeStyles((theme) => ({
     width: "50px",
   },
   drawerIconContainer: {
-    marginLeft: "auto",
+    //marginLeft: "auto",
+    marginLeft: -80,
     "&:hover": {
       backgroundColor: "transparent",
     },
