@@ -46,6 +46,7 @@ import ContactUsContainerForm from "./contactus/ContactUsContainerForm";
 import BecomePartnerFormContainer from "./partner/BecomePartnerFormContainer";
 //import mobileBackground from "./../../assets/mobileBackground.jpg";
 import heroVideo from "./../assets/video/background_video.mp4";
+import heroVideoMobile from "./../assets/video/background_video_mobile.mp4";
 
 import { baseURL } from "./../apis/util";
 
@@ -428,7 +429,7 @@ const Marketplace = (props) => {
               direction="row"
             >
               <ReactPlayer
-                url={heroVideo}
+                url={matchesSM ? heroVideoMobile : heroVideo}
                 playing
                 loop
                 muted
