@@ -97,9 +97,7 @@ function ContactUsForm(props) {
           </Typography>
           <Typography variant="h5" style={{ marginTop: 10 }}>
             <span style={{ color: "orange" }}>Email:</span>{" "}
-            <span style={{ marginLeft: 30 }}>
-              marketplace@brightwayafrica.com{" "}
-            </span>
+            <span style={{ marginLeft: 30 }}>enquiries@udaraa.com </span>
             <br /> <br /> <span style={{ color: "orange" }}>Tel:</span>{" "}
             <span style={{ marginLeft: 50 }}>+234 809 429 8412</span>
             <br /> <br />
