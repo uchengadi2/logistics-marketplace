@@ -645,7 +645,7 @@ const Marketplace = (props) => {
                       </span>
                       <br />
 
-                      <span>marketplace@brightwayafrica.com</span>
+                      <span>marketplace@udaraa.com</span>
                       <br />
 
                       <span>+234 809 429 8412, +234 809 835 4000</span>
