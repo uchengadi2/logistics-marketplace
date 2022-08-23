@@ -493,9 +493,7 @@ const Marketplace = (props) => {
                             onClick={(event) => {
                               event.preventDefault();
                               //  history.push(`/orders/completed`);
-                              window.open(
-                                "https://partners.brightwayafrica.com/"
-                              );
+                              window.open("https://partners.udaraa.com/");
                             }}
                           >
                             <span
