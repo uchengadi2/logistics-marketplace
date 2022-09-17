@@ -24,7 +24,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import Snackbar from "@material-ui/core/Snackbar";
 import Box from "@material-ui/core/Box";
 
-import logo from "./../../assets/logo.svg";
+import logo from "./../../assets/logo/udaraa.png";
 import { RouterRounded } from "@material-ui/icons";
 import history from "../../history";
 import UserLogin from "./../users/UserLogin";
@@ -60,13 +60,14 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   logo: {
-    height: "8em",
-    width: "26em",
+    height: "7em",
+    width: "10em",
+    marginLeft: -15,
     [theme.breakpoints.down("md")]: {
       height: "7em",
     },
     [theme.breakpoints.down("xs")]: {
-      height: "5.5em",
+      height: "6.5em",
     },
   },
   logoContainer: {
@@ -113,7 +114,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerIconContainer: {
     //marginLeft: "auto",
-    marginLeft: -80,
+    marginLeft: 150,
     "&:hover": {
       backgroundColor: "transparent",
     },
@@ -855,7 +856,7 @@ const Header = (props) => {
               to="/"
               className={classes.logoContainer}
             >
-              {/* <img alt="company logo" src={logo} className={classes.logo} /> */}
+              <img alt="company logo" src={logo} className={classes.logo} />
             </Button>
             {matches ? drawer : tabs}
           </Toolbar>

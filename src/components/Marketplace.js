@@ -47,6 +47,7 @@ import BecomePartnerFormContainer from "./partner/BecomePartnerFormContainer";
 //import mobileBackground from "./../../assets/mobileBackground.jpg";
 import heroVideo from "./../assets/video/background_video.mp4";
 import heroVideoMobile from "./../assets/video/background_video_mobile.mp4";
+import logo from "./../assets/logo/udaraa.png";
 
 import { baseURL } from "./../apis/util";
 
@@ -439,6 +440,12 @@ const Marketplace = (props) => {
                 height="49rem"
               />
               <div className={classes.overlay}>
+                {/* <img
+                  src={logo}
+                  alt="Udaraa Marketplace"
+                  width={180}
+                  height={150}
+                /> */}
                 <Box
                   width="100%"
                   height="100%"
@@ -452,7 +459,7 @@ const Marketplace = (props) => {
                     <Typography
                       variant={matchesSM ? "subtitle2" : "h2"}
                       align="left"
-                      style={{ marginTop: "20rem" }}
+                      style={{ marginTop: "16rem" }}
                     >
                       <span style={{ marginLeft: matchesSM ? 20 : 5 }}>
                         {" "}
